@@ -36,3 +36,20 @@ authors.each do |author|
 	author.books.create!(name: name, quantity: quantity)
 end
 
+#Category
+categories = ["textbook","novel", "manga","history", "scientist", "politic", "cultural", "computer", "technical", "geography"]
+categories.each do |category|
+	Category.create!(name: category)
+end
+
+#Bookcategory
+
+books = Book.all
+books.each do |book|
+  Bookcategory.create!(book_id: book.id ,category_id: Category.all[rand(10)].id )
+end
+Bookcategory.create!(book_id: 1 ,category_id: 9 )
+
+Category.all.each do |category|
+  Bookcategory.create!(book_id: Book.all[rand(50)].id ,category_id: category.id)
+end
