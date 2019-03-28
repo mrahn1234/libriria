@@ -44,12 +44,12 @@ end
 
 #Bookcategory
 
-books = Book.all
-books.each do |book|
-  Bookcategory.create!(book_id: book.id ,category_id: Category.all[rand(10)].id )
-end
-Bookcategory.create!(book_id: 1 ,category_id: 9 )
+# books = Book.all
+# books.each do |book|
+#   Bookcategory.create!(book_id: book.id ,category_id: Category.all[rand(10)].id )
+# end
+# Bookcategory.create!(book_id: 1 ,category_id: 9 )
 
-Category.all.each do |category|
-  Bookcategory.create!(book_id: Book.all[rand(50)].id ,category_id: category.id)
-end
+# Category.all.each do |category|
+#   Bookcategory.create!(book_id: Book.all[rand(50)].id ,category_id: category.id)
+# end
