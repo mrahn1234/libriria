@@ -36,7 +36,7 @@ authors.each do |author|
 	author.books.create!(name: name, quantity: quantity)
 end
 
-#Category
+Category
 categories = ["textbook","novel", "manga","history", "scientist", "politic", "cultural", "computer", "technical", "geography"]
 categories.each do |category|
 	Category.create!(name: category)
@@ -44,12 +44,26 @@ end
 
 #Bookcategory
 
-# books = Book.all
-# books.each do |book|
-#   Bookcategory.create!(book_id: book.id ,category_id: Category.all[rand(10)].id )
-# end
-# Bookcategory.create!(book_id: 1 ,category_id: 9 )
+books = Book.all
+books.each do |book|
+  book.categories_book  << Category.all[rand(10)]
+end
 
-# Category.all.each do |category|
-#   Bookcategory.create!(book_id: Book.all[rand(50)].id ,category_id: category.id)
-# end
+#LikeBookUser
+users= User.all
+
+users.each do |user|
+  user.liked_books << Book.all[rand(Book.all.count)]
+end
+
+#RateBookUser
+users.each do |user|
+    point = rand(1..5)
+    book = Book.all[rand(Book.all.count)]
+    Rate.create!(point: point, user_id: user.id, book_id: book.id)
+end
+users.each do |user|
+   content = Faker::Quotes::Shakespeare.as_you_like_it_quote 
+   book = Book.all[rand(Book.all.count)]
+   Comment.create!(content: content, user_id: user.id, book_id: book.id)
+end

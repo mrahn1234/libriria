@@ -1,9 +1,8 @@
 class Category < ApplicationRecord
 
-	has_many :cb_bookcategories, class_name:  "Bookcategory",
-                                  foreign_key: "category_id",
-                                  dependent:   :destroy
-	has_many :book_arr, :through => :cb_bookcategories, source: :book
+	#ManytoMany Book_Category
+	has_many :bookcategories, dependent: :destroy
+	#Validate
 	validates :name, presence: true, length: { maximum: 50 }
 	
 end
