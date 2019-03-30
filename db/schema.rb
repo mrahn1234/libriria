@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_29_173842) do
+ActiveRecord::Schema.define(version: 2019_03_29_175948) do
 
   create_table "authors", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -18,6 +18,14 @@ ActiveRecord::Schema.define(version: 2019_03_29_173842) do
     t.string "info"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "bills", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "numday"
+    t.bigint "request_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["request_id"], name: "index_bills_on_request_id"
   end
 
   create_table "bookcategories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -33,6 +41,8 @@ ActiveRecord::Schema.define(version: 2019_03_29_173842) do
   create_table "books", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.integer "quantity"
+    t.string "publisher"
+    t.integer "page"
     t.bigint "author_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -76,6 +86,16 @@ ActiveRecord::Schema.define(version: 2019_03_29_173842) do
     t.index ["user_id"], name: "index_rates_on_user_id"
   end
 
+  create_table "requests", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "verify", default: 0
+    t.bigint "user_id"
+    t.bigint "book_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_requests_on_book_id"
+    t.index ["user_id"], name: "index_requests_on_user_id"
+  end
+
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -85,6 +105,7 @@ ActiveRecord::Schema.define(version: 2019_03_29_173842) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "bills", "requests"
   add_foreign_key "bookcategories", "books"
   add_foreign_key "bookcategories", "categories"
   add_foreign_key "books", "authors"
@@ -94,4 +115,6 @@ ActiveRecord::Schema.define(version: 2019_03_29_173842) do
   add_foreign_key "likes", "users"
   add_foreign_key "rates", "books"
   add_foreign_key "rates", "users"
+  add_foreign_key "requests", "books"
+  add_foreign_key "requests", "users"
 end

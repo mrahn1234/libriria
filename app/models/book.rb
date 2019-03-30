@@ -10,6 +10,8 @@ class Book < ApplicationRecord
 	has_many :rates, dependent: :destroy
 	#ManytoMany Book_Commented_User
 	has_many :comments, dependent: :destroy
+	#ManytoMany Book_Requested_User
+	has_many :requests, dependent: :destroy
 	validates :name, presence: true, length: { maximum: 50 }
 	validates :quantity, presence: true, length: { maximum: 1000 }
 

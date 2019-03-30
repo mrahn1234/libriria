@@ -32,12 +32,14 @@ end
 authors = Author.all
 authors.each do |author|
 	name = Faker::Book.title
+  publisher = Faker::Book.publisher
 	quantity = 1000
-	author.books.create!(name: name, quantity: quantity)
+  page = rand(10..1000)
+	author.books.create!(name: name, quantity: quantity, publisher: publisher,page: page)
 end
 
 Category
-categories = ["textbook","novel", "manga","history", "scientist", "politic", "cultural", "computer", "technical", "geography"]
+categories = ["Textbook","Novel", "Manga","History", "Scientist", "Politic", "Cultural", "Computer", "Technical", "Geography"]
 categories.each do |category|
 	Category.create!(name: category)
 end

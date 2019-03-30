@@ -9,6 +9,10 @@ class User < ApplicationRecord
 	#ManytoMany User_Comment_Book
 	has_many :comments, dependent: :destroy
 	has_many :commented_books, through: :comments, source: :book
+	#ManytoMany User_Request_Book
+	has_many :requests, dependent: :destroy
+	has_many :requested_book, through: :requests, source: :book
+
 	#Validate
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 	validates :name, presence: true, length: { maximum: 50 }
