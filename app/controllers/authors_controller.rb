@@ -1,0 +1,62 @@
+class AuthorsController < ApplicationController
+
+	before_action :find_author, only: [:show, :edit, :update, :destroy]
+
+	def index
+		#@authors = Author.paginate(page: params[:page])
+		@q = Author.ransack(params[:q])
+    	@authors = @q.result.page(params[:page])
+    	@full_authors = @q.result
+    	respond_to do |format|
+	      format.html
+	      format.xls{send_data @full_authors.to_csv(col_sep: "\t")}
+	      	
+    	end
+	end
+
+	def show; end
+
+	def new
+		@author = Author.new
+	end
+
+	def create
+		@author = Author.new(author_params)
+
+		if @author.save
+			redirect_to authors_path
+		else 
+			render "new"
+		end
+	end
+
+	def edit; end
+
+	def update
+		if @author.update_attributes author_params
+			#flash[:success] = "Author updated"
+			redirect_to @author
+		else
+			render "edit"
+		end
+	end
+
+	def destroy
+		@author.destroy
+		redirect_to authors_path
+	end
+
+
+	private
+
+		def author_params
+			params.require(:author).permit(:name, :email, :info)
+		end
+
+		def find_author
+			@author = Author.find(params[:id])
+			return if @author
+			flash[:danger] = "error"
+    		redirect_to authors_path
+		end
+end

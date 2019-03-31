@@ -1,0 +1,23 @@
+<% provide :title, @author.name %>
+<h1><%= @author.name %></h1>
+
+<div class="container">
+  <dl>
+    <dt>Name</dt><dd><%= @author.name %></dd><br>
+    <dt>Email</dt><dd><%= @author.email %></dd><br>
+    <dt>Info</dt><dd><%= @author.info %></dd><br>
+  </dl>
+
+  <%= link_to "Edit", edit_author_path(@author) %>
+  <%= link_to "Delete", @author, method: :delete, data: { confirm: "Are you sure?" } %>
+
+</div>
+
+<div>
+<h1>Book(<%= @author.books.count %>)</h1>
+  <ul>
+      <ol class= "books">
+        <%= render "book"%>
+      </ol>
+  </ul>
+</div>

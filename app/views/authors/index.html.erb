@@ -1,0 +1,13 @@
+<% provide :title, "List Author" %>
+<h1>List Author</h1>
+<%= render "search"%>
+<div> 
+	<span><h2><%= link_to "Add Author", new_author_path%></h2></span>
+	<span>	<%=render "excel" %></span>
+</div>
+<%= will_paginate %>
+	
+<%= render "author" %>
+
+<%= will_paginate %>	
+
