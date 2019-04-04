@@ -166,27 +166,19 @@ footer {
 //   }
 // }
 
-// table
-table {
-  width:90%;
-}
-table, th, td {
-  border: 1px solid black;
-  border-collapse: collapse;
-}
-th, td {
-  padding: 15px;
-  text-align: left;
-}
-
-// .gravatar {
-//   float: left;
-//   margin-right: 10px;
+// // table
+// table {
+//   width:90%;
+// }
+// table, th, td {
+//   border: 1px solid black;
+//   border-collapse: collapse;
+// }
+// th, td {
+//   padding: 15px;
+//   text-align: left;
 // }
 
-// .gravatar_edit {
-//   margin-top: 15px;
-// }
 
 /* forms */
 textarea, select, .uneditable-input {
@@ -205,122 +197,21 @@ input {
 .btn-group input{
   width: auto !important;
 }
-
-#error_explanation {
-  color: red;
-  ul {
-    color: red;
-    margin: 0 0 30px 0;
-  }
-}
-
-.field_with_errors {
-  @extend .has-error;
-  .form-control {
-    color: $state-danger-text;
-  }
-}
-
-/* Users index */
-.users {
+//author
+.authors {
   list-style: none;
   margin: 0;
+
   li {
     overflow: auto;
-    padding: 15px 0;
+    padding: 10px 0;
     border-bottom: 1px solid $gray-lighter;
-    text-align: justify;
+    padding-right: 3%
+  }
+  span
+  {
+    float: right;
+    border-right: 100px;
   }
 }
 
-/* Book row */
-.num_of_page {
-  color: green;
-}
-
-.btn-right {
-  float: right !important;
-}
-
-.book_name {
-  color: $green;
-}
-
-.number_book {
-  color: $blue;
-  text-align: center;
-}
-
-.number_book1 {
-  color: $red;
-  text-align: center;
-}
-
-.number_book_th {
-  text-align: center;
-}
-
-.status {
-  color: $green;
-}
-
-._status {
-  width: 11%;
-}
-
-.num_of_book {
-  color: $blue;
-}
-
-.request {
-  border-bottom: 1px solid $gray-lighter;
-  text-align: left;
-  th {
-    text-align: left;
-  }
-}
-
-.inline {
-  width: 48% !important;
-  text-align: center !important;
-}
-
-.text-center {
-  text-align: center !important;
-}
-
-.note {
-  width: 4%;
-}
-
-.name_user {
-  width: 10%;
-}
-
-.stock {
-  color: $red;
-}
-
-.gravatar_width {
-  width: "30%";
-}
-
-.name_width {
-  width: "40%";
-}
-
-.search_inline {
-  display: inline !important;
-}
-
-.search_input {
-  width: 30% !important;
-}
-
-.btn_search {
-  width: 10% !important;
-}
-
-.btn_auto {
-  width: auto !important;
-}

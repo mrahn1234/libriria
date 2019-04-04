@@ -1,20 +1,8 @@
-<% @authors.each do |author| %>
-  <div class="row">
-    <div class="col-md-12">
-      <table class="table table-hover">
-        <tr>
-          <td width="30%">
-            <%= link_to author.name, author %>
-          </td>
-          <td class="text-center" width="40%">
-	          <td class="text-right">
-	            <%= link_to "Delete", author,
-	              method: :delete, data: {confirm: "Are you sure?"} %>
-	              | <%= link_to "Edit", edit_author_path(author) %>
-	          </td>
-      	 </td>
-        </tr>
-      </table>
-    </div>
-  </div>
-<% end %>
+<li>
+  <%= link_to author.name, author %>
+  <span class ="button">
+    <%= link_to "Edit", edit_author_path(author)%> |  
+    <%= link_to "Delete", author, method: :delete,
+                                     data: { confirm: "You sure?" } %>
+  </span>
+</li>
