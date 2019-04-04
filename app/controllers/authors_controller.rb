@@ -5,7 +5,7 @@ class AuthorsController < ApplicationController
 	def index
 		#@authors = Author.paginate(page: params[:page])
 		@q = Author.ransack(params[:q])
-    	@authors = @q.result.page(params[:page])
+    	@authors = @q.result.order("created_at DESC").page(params[:page])
     	@full_authors = @q.result
     	respond_to do |format|
 	      format.html
@@ -44,9 +44,9 @@ class AuthorsController < ApplicationController
 	def destroy
 		@author.destroy
 		respond_to do |format|
-	      # format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
-	      # format.json { head :no_content }
-	      format.js {render layout: false}
+	      format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
+	      format.json { head :no_content }
+	      format.js 
     	end
 	end
 

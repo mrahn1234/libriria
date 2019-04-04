@@ -1,8 +1,8 @@
 <li>
   <%= link_to author.name, author %>
-  <span class ="button">
+  <span >
     <%= link_to "Edit", edit_author_path(author)%> |  
     <%= link_to "Delete", author, method: :delete,
-                                     data: { confirm: "You sure?" } %>
+                                     data: { confirm: "You sure?", remote: true },class: "delete_author" %>
   </span>
 </li>
