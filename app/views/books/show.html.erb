@@ -1,0 +1,8 @@
+<h1><%= @book.name %></h1>
+<h2><%= @book.author.name %></h2>
+<h2><%= @book.categories_book.name %></h2>
+<h3><%= @book.publisher %></h3>
+<h3><%= @book.page %></h3>
+<h3><%= @book.quantity %></h3>
+<%= link_to "Edit", edit_book_path %>
+<%= link_to "Delete", book_path, method: :delete, data: {confirm: "Are you ready?"} %>
