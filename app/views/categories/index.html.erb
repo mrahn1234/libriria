@@ -1,0 +1,16 @@
+<h1>Category Index<h1>
+<div>
+  <% @categories.each do |category| %>
+    <div>
+      <%= link_to category.name, category_path(category.id) %> <span>(<%= category.bookcategories.count %>)<span>  
+      <%# if current_user.admin? && !current_user?(user) %>
+    | <%= link_to "delete", category, method: :delete,
+                                  data: { confirm: "You sure?" } %>
+    | <%= link_to "edit", edit_category_path(category.id) %>
+  	<%# end %>
+    </div>
+ <% end %>
+</div>
+<div>
+   <span><%= link_to "Add new Category", new_category_path %></span>
+</div>

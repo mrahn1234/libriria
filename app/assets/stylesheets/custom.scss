@@ -162,4 +162,28 @@ input {
     border-right: 100px;
   }
 }
-
+//User  
+.users {
+    list-style: none;
+    margin: 0;
+    font-size: auto;
+    li {
+      overflow: auto;
+      padding: 10px 0;
+      border-bottom: 1px solid $gray-lighter;
+    }
+  }
+.user_avatars {
+    overflow: auto;
+    margin-top: 10px;
+    .gravatar {
+      margin: 1px 1px;
+    }
+    a {
+      padding: 0;
+    }
+}
+.user_info
+{
+  font-size: 10px;
+}

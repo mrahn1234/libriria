@@ -22,7 +22,7 @@ class AuthorsController < ApplicationController
 
 	def create
 		@author = Author.new(author_params)
-
+		byebug
 		if @author.save
 			redirect_to authors_path
 		else 
