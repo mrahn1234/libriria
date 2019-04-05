@@ -1,4 +1,4 @@
-class Category < ApplicationRecord
+	class Category < ApplicationRecord
 
 	#ManytoMany Book_Category
 	has_many :bookcategories, dependent: :destroy

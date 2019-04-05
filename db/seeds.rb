@@ -64,3 +64,11 @@ users.each do |user|
     book = Book.all[rand(Book.all.count)]
     Review.create!(rating: rating,content: content, user_id: user.id, book_id: book.id)
 end
+
+#User_Follow_User
+users = User.all
+user  = users.first
+following = users[2..50]
+followers = users[3..40]
+following.each { |followed| user.follow(followed) }
+followers.each { |follower| follower.follow(user) }

@@ -12,6 +12,18 @@ class User < ApplicationRecord
 	#ManytoMany User_Review_Book
 	has_many :reviews, dependent: :destroy
 	has_many :reviewed_books, through: :reviews, source: :book
+	#ManytoMany User_follow
+	has_many :active_relationships, class_name: "Relationship",
+									foreign_key: "follower_id",
+									dependent:         :destroy
+
+	has_many :passive_relationships, class_name: "Relationship",
+									 foreign_key: "followed_id",
+									 dependent:	  :destroy
+
+	has_many :following, through: :active_relationships, source: :followed
+	has_many :followers, through: :passive_relationships, source: :follower
+
 	#Validate
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 	validates :name, presence: true, length: { maximum: 50 }
@@ -41,14 +53,26 @@ class User < ApplicationRecord
 	end
 
 	# return true if the given token matches the digest
-	def authenticated?(remember_token)
-		return false if remember_digest.nil?
-		Bcrypt::Password.new(remember_digest).is_password?(remember_token)
+	def authenticated?(attribute, token)
+		digest = send("#{attribute}_digest")
+		  return false if digest.nil?
+		  BCrypt::Password.new(digest).is_password?(token)
 	end
 
 	def forget
-		update_attribute(remember_digest, nil)
+		update_attribute(:remember_digest, nil)
 	end
 
+	def follow(other_user)
+		following << other_user
+	end
+
+	def unfollow(other_user)
+		following.delete(other_user)
+	end
+
+	def following?(other_user)
+		following.include?(other_user)
+	end
 end
 

@@ -53,6 +53,10 @@ GEM
     bindex (0.6.0)
     bootsnap (1.4.2)
       msgpack (~> 1.0)
+    bootstrap (4.3.1)
+      autoprefixer-rails (>= 9.1.0)
+      popper_js (>= 1.14.3, < 2)
+      sassc-rails (>= 2.0.0)
     bootstrap-sass (3.4.1)
       autoprefixer-rails (>= 5.2.1)
       sassc (>= 2.0.0)
@@ -119,6 +123,7 @@ GEM
     nio4r (2.3.1)
     nokogiri (1.10.2)
       mini_portile2 (~> 2.4.0)
+    popper_js (1.14.5)
     public_suffix (3.0.3)
     puma (3.12.1)
     rack (2.0.6)
@@ -233,6 +238,7 @@ PLATFORMS
 DEPENDENCIES
   bcrypt (~> 3.1.7)
   bootsnap (>= 1.1.0)
+  bootstrap
   bootstrap-sass (~> 3.4, >= 3.4.1)
   byebug
   capybara (>= 2.15)
