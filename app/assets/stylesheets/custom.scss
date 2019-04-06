@@ -232,7 +232,11 @@ body {
     transition: all 0.4s ease 0s;
     }
   }
-  
+.selected-control{
+  height: 50%;
+}
+
+//Error  
   #error_explanation {
     color: red;
     ul {
@@ -374,6 +378,22 @@ body {
   }
 }
 .users{
+  list-style: none;
+  margin: 0;
+
+  li {
+    overflow: auto;
+    padding: 10px 0;
+    border-bottom: 1px solid $gray-lighter;
+    padding-right: 3%
+  }
+  span
+  {
+    float: right;
+    border-right: 100px;
+  }
+}
+.categories{
   list-style: none;
   margin: 0;
 

@@ -1,11 +1,10 @@
-<%# provide(:title, @user.name) %>
-<div class="row">
-  <aside class="col-md-4">
-    <section>
-        <h3> <%= @category.name %></h3>
-    </section>
-  </aside>
-  <div class="col-md-8">
-      <h3>Books (<%= @category.bookofcategory.count %>)</h3>
-  </div>
-</div> 
+<% provide :title, @category.name %>
+<h1><%= @category.name+"(#{@category.bookofcategory.count})" %></h1>
+
+<div>
+  <ul class="books">
+       <%= render "book"%>     
+  </ul> 
+  <h2><%= link_to "Add book", new_book_path %></h2>
+</div>
+

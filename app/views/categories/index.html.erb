@@ -1,16 +1,16 @@
-<h1>Category Index<h1>
-<div>
-  <% @categories.each do |category| %>
-    <div>
-      <%= link_to category.name, category_path(category.id) %> <span>(<%= category.bookcategories.count %>)<span>  
-      <%# if current_user.admin? && !current_user?(user) %>
-    | <%= link_to "delete", category, method: :delete,
-                                  data: { confirm: "You sure?" } %>
-    | <%= link_to "edit", edit_category_path(category.id) %>
-  	<%# end %>
-    </div>
- <% end %>
-</div>
-<div>
-   <span><%= link_to "Add new Category", new_category_path %></span>
-</div>
+<% provide(:title, "Category") %>
+<h1>List Category</h1>
+<%= render "shared/search"%>
+<% if current_user.role ==1 && !current_user?(@user) %>
+  <div> 
+    <span><h2><%= link_to "Add Category", new_category_path%></h2></span>
+  </div>
+<% end %>
+<%= will_paginate %>
+
+<ul class="categories">
+   <%= render @categories %>
+</ul>
+
+<%= will_paginate %>  
+

@@ -5,12 +5,12 @@
 <div class="container">
     <dl>
     <dt>Author:</dt><dd><%= link_to @book.author.name, @book.author %></dd><br>
-    <dt>Category</dt>
+    <dt>Category:</dt><dd>
     	<dd><% @book.categories_book.each do |c|%>
-    		<p> <%= c.name %> </p>
+    		<p> <%= link_to c.name, c%> </p>
     	</dd><br>
     	<% end %>
-    <dt>Publisher</dt><dd><%= @book.publisher %></dd><br>
+    <dt>Publisher:</dt><dd><%= @book.publisher %></dd><br>
   </dl>
 	<% if current_user.role ==1 && !current_user?(@user) %>
 	   <%= link_to "Edit", edit_book_path(@book), class: "btn btn-primary edit" %>

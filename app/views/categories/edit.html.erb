@@ -2,8 +2,7 @@
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-    <%= simple_form_for(@category) do |f| %>
-      <%= render 'shared/error_messages', object: f.object %>
+    <%= form_for(@category) do |f| %>
 
       <%= f.label :name %>
       <%= f.text_field :name, class: 'form-control' %>

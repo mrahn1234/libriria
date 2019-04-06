@@ -3,13 +3,11 @@ class CategoriesController < ApplicationController
   before_action :find_category, only: [:show, :update, :edit, :destroy]
 
   def index
-    @categories = Category.all
+    @q = Category.ransack(params[:q])
+    @categories = @q.result.order("created_at DESC").page(params[:page])
   end
 
-  def show
-     @category = Category.find(params[:id])
-     @books = @category.bookofcategory
-  end
+  def show;end
 
   def new
     @category = Category.new
@@ -19,7 +17,7 @@ class CategoriesController < ApplicationController
     @category = Category.new(category_params)
     if @category.save
       flash[:info] = "Adding Category Success!"
-      redirect_to @category
+      redirect_to action: "index"
     else    
       render 'new'
     end
@@ -38,8 +36,11 @@ class CategoriesController < ApplicationController
 
   def destroy
     @category.destroy
-    flash[:success] = "Category deleted"
-    redirect_to categories_url
+    respond_to do |format|
+        format.js
+    end
+    # flash[:success] = "Category deleted"
+    # redirect_to categories_url
   end
 
   private 

@@ -3,12 +3,12 @@
     <%= form_for(@book) do |f| %>
       
       <%=f.label :author %>
-      <%=f.collection_select :name, get_authors(:id), :id, :name, prompt: :select, class: 'form-control'%>
+      <%= f.collection_select :author_id, Author.all, :id, :name, {:class => 'form-control'} %>
 
+      <%=f.label :category %>
+      <%= f.collection_select :categories_book, Category.all, :id, :name,{:class => 'form-control'} %>
 	 
-      <br/>
-      <%= collection_select(:category, :category_id, Category.all, :id, :name)%>
-      <br/>
+
       <%= f.label :name %>
       <%= f.text_field :name, class: 'form-control' %>
 
