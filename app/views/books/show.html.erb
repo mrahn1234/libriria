@@ -3,7 +3,7 @@
 <h1><%= @book.name %></h1>
 
 <div class="container">
-  <dl>
+    <dl>
     <dt>Author:</dt><dd><%= link_to @book.author.name, @book.author %></dd><br>
     <dt>Category</dt>
     	<dd><% @book.categories_book.each do |c|%>
