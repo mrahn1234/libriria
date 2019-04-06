@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
- 
 	root 'static_pages#home'
   	get 'help'  =>  'static_pages#help'
 
@@ -24,4 +23,8 @@ Rails.application.routes.draw do
 
 	resources :relationships, only: [:create, :destroy] 
 
+  resources :books
+  # resources :categories
+  root 'books#index'
+  
 end

@@ -1,0 +1,19 @@
+
+<% provide :title, @book.name %>
+<h1><%= @book.name %></h1>
+
+<div class="container">
+  <dl>
+    <dt>Author:</dt><dd><%= link_to @book.author.name, @book.author %></dd><br>
+    <dt>Category</dt>
+    	<dd><% @book.categories_book.each do |c|%>
+    		<p> <%= c.name %> </p>
+    	</dd><br>
+    	<% end %>
+    <dt>Publisher</dt><dd><%= @book.publisher %></dd><br>
+  </dl>
+	<% if current_user.role ==1 && !current_user?(@user) %>
+	   <%= link_to "Edit", edit_book_path(@book), class: "btn btn-primary edit" %>
+     <%= link_to "Delete", @book, method: :delete, data: { confirm: "You sure?", remote: true },class: "delete_book btn btn-primary delete " %>
+  <% end %>
+</div>

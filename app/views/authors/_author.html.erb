@@ -1,8 +1,10 @@
 <li>
   <%= link_to author.name, author %>
-  <span >
-    <%= link_to "Edit", edit_author_path(author)%> |  
-    <%= link_to "Delete", author, method: :delete,
-                                     data: { confirm: "You sure?", remote: true },class: "delete_author" %>
-  </span>
+  <% if current_user.role ==1 && !current_user?(@user) %>
+  	<span >
+    	<%= link_to "Edit", edit_author_path(author), class: "btn btn-primary edit"%>
+    	<%= link_to "Delete", author, method: :delete,
+                                     data: { confirm: "You sure?", remote: true },class: "delete_author btn btn-primary delete" %>
+  	</span>
+  <% end %>
 </li>

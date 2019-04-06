@@ -1,0 +1,10 @@
+<li> 
+   <%= link_to book.name , book %>
+   <% if current_user.role ==1 && !current_user?(@user) %>
+   		<span>
+   	 		<%= link_to "Edit", edit_book_path(book), class: "btn btn-primary edit" %>
+   			 <%= link_to "Delete", book, method: :delete, data: { confirm: "You sure?", remote: true },class: "delete_book btn btn-primary delete " %>
+   		</span>
+   <% end %>
+</li>
+

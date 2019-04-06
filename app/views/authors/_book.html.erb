@@ -1,3 +1,5 @@
 <% @author.books.each do |book| %>
-  <span class="book"><%= link_to book.name%></span> <br/>
+ 	<li> 
+    	<%= link_to book.name , book %>
+    </li>
 <% end %>

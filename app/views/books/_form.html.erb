@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@book) do |f| %>
+      
+      <%=f.label :author %>
+      <%=f.collection_select :name, get_authors(:id), :id, :name, prompt: :select, class: 'form-control'%>
+
+	 
+      <br/>
+      <%= collection_select(:category, :category_id, Category.all, :id, :name)%>
+      <br/>
+      <%= f.label :name %>
+      <%= f.text_field :name, class: 'form-control' %>
+
+      <%= f.label :quantity %>
+      <%= f.text_field :quantity, class: 'form-control' %>
+
+      <%= f.label :page %>
+      <%= f.text_field :page, class: 'form-control' %>
+
+      <%= f.label :publisher %>
+      <%= f.text_field :publisher, class: 'form-control' %>
+
+
+      <%= f.submit "Create", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>  

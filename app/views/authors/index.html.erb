@@ -1,17 +1,16 @@
 <% provide(:title, "List author") %>
 <h1>List Author</h1>
-<%= render "search"%>
-<div> 
-	<span><h2><%= link_to "Add Author", new_author_path%></h2></span>
-	<span>	<%=render "excel" %></span>
-</div>
-
+<%= render "shared/search"%>
+<% if current_user.role ==1 && !current_user?(@user) %>
+	<div> 
+		<span><h2><%= link_to "Add Author", new_author_path%></h2></span>
+		<span>	<%=render "excel" %></span>
+	</div>
+<% end %>
 <%= will_paginate %>
 
 <ul class="authors">
-	<% @authors.each do |author| %>
-	 	<%= render author %>
-	<% end %>
+	 <%= render @authors %>
 </ul>
 
 <%= will_paginate %>	
