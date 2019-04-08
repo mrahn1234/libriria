@@ -5,17 +5,16 @@
       <%=f.label :author %>
       <%= f.collection_select :author_id, Author.all, :id, :name, {:class => 'form-control'} %>
 
-	 
-
-      <div>
+      <div id="categories">
         <%= f.fields_for :bookcategories do |bc| %>
-        <div>
-          <%= bc.label :category_id %>
-           <%= bc.collection_select :category_id, Category.all, :id, :name,{:class => 'form-control'} %>
-        </div> 
-        <%= link_to_add_association 'add cc', f, :bookcategories %>
+          
+            <%= render "bookcategory_fields", f: bc%>
+
        <% end %>
+       <%= link_to_add_association 'Add category', f, :bookcategories %>
      </div>
+
+   
 
 
       <%= f.label :name %>

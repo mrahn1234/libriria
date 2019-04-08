@@ -54,8 +54,12 @@ class BooksController < ApplicationController
 	def book_params
 		params.require(:book).permit(:name, :quantity, :publisher, 
 			:page, :author_id,  
-			:bookcategories_attributes =>[:category_id,:_destroy])	
+			bookcategories_attributes: [:category_id,:_destroy])	
 	end
+
+	# def list_categories
+ #  		@categories = Category.all.select(:id, :name).map{|category| [category.name, category.id]}
+ # 	end
 
 	def find_book
 		@book = Book.find(params[:id])
