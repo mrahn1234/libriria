@@ -3,8 +3,8 @@ class Book < ApplicationRecord
 	belongs_to :author
 	#ManytoMany Book_Category
 	has_many :bookcategories, dependent: :destroy
-	has_many :categories_book, through: :bookcategories	, source: :category
-	# accepts_nested_attributes_for :bookcategories
+	has_many :categories, through: :bookcategories	#, source: :category
+	accepts_nested_attributes_for :bookcategories
  	#ManytoMany Book_Liked_User
     has_many :likes, dependent: :destroy
 	#ManytoMany Book_Reviewed

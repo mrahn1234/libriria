@@ -12,29 +12,10 @@ class BooksController < ApplicationController
     	end
 	end
 
-	def new
-		@book= Book.new
-	end
+	
+	def show;end
 
-	def create
-		byebug
-		@book= Book.new(book_params)
-		@book.categories_book << Category.find(params[:category][:category_id])
-		# @book_category = Bookcategory.new(book_id: @book.id, category_id: @category.id)
-		
-		if @book.save
-			
-			redirect_to root_path
-		else
-			render 'new'
-		end
-	end
-
-	def show
-	end
-
-	def edit
-	end
+	def edit; end
 
 	def update
 		if @book.update(book_params)
@@ -43,6 +24,23 @@ class BooksController < ApplicationController
 			render 'edit'
 		end
 	end
+	
+	def new
+		@book= Book.new
+		@book.bookcategories.build
+	end
+
+	def create
+		@book= Book.new(book_params)
+		byebug
+		if @book.save
+			#Bookcategory.create!(book_id: @book.id, category_id: params[:book][:categories])
+			redirect_to @book
+		else
+			render 'new'
+		end
+	end
+
 
 	def destroy
 		@book.destroy
@@ -54,15 +52,14 @@ class BooksController < ApplicationController
 	private
 
 	def book_params
-		params.require(:book).permit(:name,:quantity,:publisher,:page, :author_id,bookcategories_attributes:[:book_id,:category_id])
+		params.require(:book).permit(:name, :quantity, :publisher, 
+			:page, :author_id,  
+			:bookcategories_attributes =>[:category_id,:_destroy])	
 	end
-
-	# def category_params
-	# 	params.require(:book).permit([:categories_book])
-	# end
 
 	def find_book
 		@book = Book.find(params[:id])
 	end
+
 
 end

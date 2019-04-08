@@ -1,5 +1,5 @@
 <li>
-  <%= link_to "#{category.name}(#{category.bookcategories.count})", category %>
+  <%= link_to "#{category.name}(#{category.books.count})", category %>
   <% if current_user.role ==1 && !current_user?(@user) %>
   	<span >
     	<%= link_to "Edit", edit_category_path(category), class: "btn btn-primary edit"%>

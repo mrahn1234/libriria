@@ -6,7 +6,7 @@
     <dl>
     <dt>Author:</dt><dd><%= link_to @book.author.name, @book.author %></dd><br>
     <dt>Category:</dt><dd>
-    	<dd><% @book.categories_book.each do |c|%>
+    	<dd><% @book.categories.each do |c|%>
     		<p> <%= link_to c.name, c%> </p>
     	</dd><br>
     	<% end %>

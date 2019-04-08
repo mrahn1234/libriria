@@ -1,5 +1,5 @@
 <% provide :title, @category.name %>
-<h1><%= @category.name+"(#{@category.bookofcategory.count})" %></h1>
+<h1><%= @category.name+"(#{@category.books.count})" %></h1>
 
 <div>
   <ul class="books">

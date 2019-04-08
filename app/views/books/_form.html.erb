@@ -5,9 +5,18 @@
       <%=f.label :author %>
       <%= f.collection_select :author_id, Author.all, :id, :name, {:class => 'form-control'} %>
 
-      <%=f.label :category %>
-      <%= f.collection_select :categories_book, Category.all, :id, :name,{:class => 'form-control'} %>
 	 
+
+      <div>
+        <%= f.fields_for :bookcategories do |bc| %>
+        <div>
+          <%= bc.label :category_id %>
+           <%= bc.collection_select :category_id, Category.all, :id, :name,{:class => 'form-control'} %>
+        </div> 
+        <%= link_to_add_association 'add cc', f, :bookcategories %>
+       <% end %>
+     </div>
+
 
       <%= f.label :name %>
       <%= f.text_field :name, class: 'form-control' %>
@@ -26,3 +35,4 @@
     <% end %>
   </div>
 </div>  
+
