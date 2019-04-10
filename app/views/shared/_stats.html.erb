@@ -4,12 +4,24 @@
    <strong id ="following" class="stat">
     <%= @user.following.count %>
    </strong>
-   following
+   following user
  </a>
  <a  href="<%= followers_user_path(@user) %>">
    <strong id ="followers" class="stat">
    <%= @user.followers.count %>
    </strong>
    followers
- </a>      
+ </a> 
+  <a  href="<%= followingbook_user_path(@user) %>">
+   <strong id ="followingbook" class="stat">
+   <%= @user.follows.where(target_type: "Book").count %>
+   </strong>
+   following book
+ </a>
+ <a  href="<%= followingauthor_user_path(@user) %>">
+   <strong id ="followingauthor" class="stat">
+   <%= @user.follows.where(target_type: "Author").count %>
+   </strong>
+   following author
+ </a> 
 </div> 

@@ -11,6 +11,9 @@ class Book < ApplicationRecord
 	has_many :reviews, dependent: :destroy
 	#ManytoMany Book_Requested_User
 	has_many :requests, dependent: :destroy
+	#Many to Many Poly Follow book, author
+	has_many :follows, as: :target, dependent: :destroy
+
 	validates :name, presence: true, length: { maximum: 50 }
 	validates :quantity, presence: true, length: { maximum: 1000 }
 

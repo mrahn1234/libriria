@@ -1,0 +1,18 @@
+<% provide(:title, @title) %>
+<div class="row">
+  <aside class="col-md-4">
+    <section class="user_info">
+      <%= gravatar_for @user %>
+      <h1><%= @user.name %></h1>
+      <span><%= link_to "view my profile", @user %></span>
+    </section>
+  </aside>
+  <div class="col-md-8">
+    <h3><%= @title %></h3>
+    <% if @books.any? %>
+      <ul class="users followingbook">
+        <%= render @books %>
+      </ul>
+    <% end %>
+  </div>
+</div> 

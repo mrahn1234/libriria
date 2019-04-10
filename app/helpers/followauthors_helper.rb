@@ -1,0 +1,2 @@
+module FollowauthorsHelper
+end

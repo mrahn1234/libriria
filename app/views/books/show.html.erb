@@ -16,4 +16,5 @@
 	   <%= link_to "Edit", edit_book_path(@book), class: "btn btn-primary edit" %>
      <%= link_to "Delete", @book, method: :delete, data: { confirm: "You sure?", remote: true },class: "delete_book btn btn-primary delete " %>
   <% end %>
+  <%= render 'follow_book_form' if logged_in? %>
 </div>
