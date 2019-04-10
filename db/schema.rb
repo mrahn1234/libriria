@@ -56,12 +56,13 @@ ActiveRecord::Schema.define(version: 2019_04_05_054659) do
   end
 
   create_table "follows", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "user_id"
-    t.integer "target_id"
+    t.integer "user_id"
+    t.bigint "target_id"
     t.string "target_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_follows_on_user_id"
+    t.index ["target_type", "target_id"], name: "index_follows_on_target_type_and_target_id"
+    t.index ["user_id", "target_id", "target_type"], name: "index_follows_on_user_id_and_target_id_and_target_type", unique: true
   end
 
   create_table "likes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -70,6 +71,7 @@ ActiveRecord::Schema.define(version: 2019_04_05_054659) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["book_id"], name: "index_likes_on_book_id"
+    t.index ["user_id", "book_id"], name: "index_likes_on_user_id_and_book_id", unique: true
     t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
@@ -118,7 +120,6 @@ ActiveRecord::Schema.define(version: 2019_04_05_054659) do
   add_foreign_key "bookcategories", "books"
   add_foreign_key "bookcategories", "categories"
   add_foreign_key "books", "authors"
-  add_foreign_key "follows", "users"
   add_foreign_key "likes", "books"
   add_foreign_key "likes", "users"
   add_foreign_key "requests", "books"

@@ -13,5 +13,9 @@
     <dt>Page:</dt><dd><%= @book.page %></dd><br>
     <dt>Quantity:</dt><dd><%= @book.quantity %></dd><br>
   </dl>
-	
+	<% if current_user.role ==1 && !current_user?(@user) %>
+	   <%= link_to "Edit", edit_book_path(@book), class: "btn btn-primary edit" %>
+     <%= link_to "Delete", @book, method: :delete, data: { confirm: "You sure?", remote: true },class: "delete_book btn btn-primary delete " %>
+  <% end %>
+  <%= render 'follow_book_form' if logged_in? %>
 </div>
