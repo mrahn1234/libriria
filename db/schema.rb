@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_05_054659) do
+ActiveRecord::Schema.define(version: 2019_04_10_101654) do
 
   create_table "authors", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -18,14 +18,6 @@ ActiveRecord::Schema.define(version: 2019_04_05_054659) do
     t.string "info"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "bills", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "numday"
-    t.bigint "request_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["request_id"], name: "index_bills_on_request_id"
   end
 
   create_table "bookcategories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -85,8 +77,14 @@ ActiveRecord::Schema.define(version: 2019_04_05_054659) do
     t.index ["follower_id"], name: "index_relationships_on_follower_id"
   end
 
+  create_table "request_details", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  end
+
   create_table "requests", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "verify", default: 0
+    t.datetime "datefrom"
+    t.datetime "dateto"
+    t.integer "number"
     t.bigint "user_id"
     t.bigint "book_id"
     t.datetime "created_at", null: false
@@ -116,7 +114,6 @@ ActiveRecord::Schema.define(version: 2019_04_05_054659) do
     t.string "remember_digest"
   end
 
-  add_foreign_key "bills", "requests"
   add_foreign_key "bookcategories", "books"
   add_foreign_key "bookcategories", "categories"
   add_foreign_key "books", "authors"

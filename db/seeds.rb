@@ -48,7 +48,7 @@ end
 
 books = Book.all
 books.each do |book|
-  book.categories_book  << Category.all[rand(10)]
+  book.categories  << Category.all[rand(10)]
 end
 
 #LikeBookUser

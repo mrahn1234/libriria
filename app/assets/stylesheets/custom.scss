@@ -1,4 +1,4 @@
-
+    
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
@@ -346,9 +346,25 @@ body {
     }
   
   }
+ a.btn.btn-primary.borrow {
+    /* default for <button>, but useful for <a> */
+    background-color: #8A33FF;
+
+    &:hover{
+      color: red;
+      border-color: currentColor;
+      background-color: white;
+    }
+
+    &:focus{
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(255, 105, 180, 0.5),
+                0 0 0 1.5px rgba(255, 105, 180, 0.5);
+    }
   
-//author
-.authors {
+  } 
+//list author, book, category,user
+.authors,.books,.categories,.users,.requests  {
   list-style: none;
   margin: 0;
 
@@ -364,52 +380,4 @@ body {
     border-right: 100px;
   }
 }
-//books
-.books   {
-  list-style: none;
-  margin: 0;
 
-  li {
-    overflow: auto;
-    padding: 10px 0;
-    border-bottom: 1px solid $gray-lighter;
-    padding-right: 3%
-  }
-  span
-  {
-    float: right;
-    border-right: 100px;
-  }
-}
-.users{
-  list-style: none;
-  margin: 0;
-
-  li {
-    overflow: auto;
-    padding: 10px 0;
-    border-bottom: 1px solid $gray-lighter;
-    padding-right: 3%
-  }
-  span
-  {
-    float: right;
-    border-right: 100px;
-  }
-}
-.categories{
-  list-style: none;
-  margin: 0;
-
-  li {
-    overflow: auto;
-    padding: 10px 0;
-    border-bottom: 1px solid $gray-lighter;
-    padding-right: 3%
-  }
-  span
-  {
-    float: right;
-    border-right: 100px;
-  }
-}

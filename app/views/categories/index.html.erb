@@ -1,11 +1,11 @@
 <% provide(:title, "Category") %>
 <h1>List Category</h1>
 <%= render "shared/search"%>
-<% if current_user.role ==1 && !current_user?(@user) %>
-  <div> 
-    <span><h2><%= link_to "Add Category", new_category_path%></h2></span>
-  </div>
-<% end %>
+<% if logged_in? && current_user.role == 1 && !current_user?(@user)  %>
+	<div> 
+    	<span><h2><%= link_to "Add Category", new_category_path%></h2></span>
+  	</div>
+<%end%>
 <%= will_paginate %>
 
 <ul class="categories">

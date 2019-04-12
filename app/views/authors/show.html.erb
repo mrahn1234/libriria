@@ -7,7 +7,7 @@
     <dt>Email</dt><dd><%= @author.email %></dd><br>
     <dt>Info</dt><dd><%= @author.info %></dd><br>
   </dl>
-  <% if current_user.role ==1 && !current_user?(@user) %>
+  <% if logged_in? && current_user.role ==1 && !current_user?(@user) %>
     <%= link_to "Edit", edit_author_path(@author), class: "btn btn-primary edit" %>
     <%= link_to "Delete", @author, method: :delete, data: { confirm: "You sure?", remote: true },class: "delete_author btn btn-primary delete " %>
     <%= render 'follow_author_form' if logged_in? %>

@@ -13,9 +13,17 @@
     <dt>Page:</dt><dd><%= @book.page %></dd><br>
     <dt>Quantity:</dt><dd><%= @book.quantity %></dd><br>
   </dl>
-	<% if current_user.role ==1 && !current_user?(@user) %>
+	<% if logged_in? && current_user.role ==1 && !current_user?(@user) %>
 	   <%= link_to "Edit", edit_book_path(@book), class: "btn btn-primary edit" %>
      <%= link_to "Delete", @book, method: :delete, data: { confirm: "You sure?", remote: true },class: "delete_book btn btn-primary delete " %>
   <% end %>
-  <%= render 'follow_book_form' if logged_in? %>
+  <% if logged_in? %>
+    <div class="borrow">
+        <%= link_to "Borrow", new_book_request_path(@book), class: "btn btn-primary borrow"%>
+    </div>
+  <% end %>
+  
+  <div>
+    <%= render 'follow_book_form' if logged_in? %>
+  </div>
 </div>

@@ -10,12 +10,9 @@
           
             <%= render "bookcategory_fields", f: bc%>
 
-       <% end %>
-       <%= link_to_add_association 'Add category', f, :bookcategories %>
+        <% end %>
+        <%= link_to_add_association 'Add category', f, :bookcategories %>
      </div>
-
-   
-
 
       <%= f.label :name %>
       <%= f.text_field :name, class: 'form-control' %>

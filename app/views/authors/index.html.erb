@@ -1,7 +1,7 @@
 <% provide(:title, "List author") %>
 <h1>List Author</h1>
 <%= render "shared/search"%>
-<% if current_user.role ==1 && !current_user?(@user) %>
+<% if logged_in? && current_user.role ==1 && !current_user?(@user) %>
 	<div> 
 		<span><h2><%= link_to "Add Author", new_author_path%></h2></span>
 		<span>	<%=render "excel" %></span>

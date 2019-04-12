@@ -1,0 +1,25 @@
+<li>
+  <% if logged_in? %> 
+  	<%= link_to Book.find(request.book_id).name, request%>
+  	<% if request.verify == 0 %>
+      <% if current_user.role ==1 && !current_user?(@user) %>
+    		<span>
+  	  		<%= link_to "Accept", accept_request_request_path(request), class: "btn btn-primary edit" %>
+  	    	<%= link_to "Decline", decline_request_request_path(request), class: "btn btn-primary delete" %>
+    		</span>
+      <% else %>
+        <span style="color: gray">Pending</span>
+    <% end %>
+  	<%elsif request.verify == 1 %>
+  		<span style="color: green">
+	  		Accepted
+  		</span>
+  	<% else %>
+  		<span style="color: red">
+	  		Declined
+  		</span>
+  	<% end %>
+  	
+  <% end %>
+</li>
+

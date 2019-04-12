@@ -1,6 +1,6 @@
 <li>
   <%= link_to author.name, author %>
-  <% if current_user.role ==1 && !current_user?(@user) %>
+  <% if logged_in? && current_user.role ==1 && !current_user?(@user) %>
   	<span >
     	<%= link_to "Edit", edit_author_path(author), class: "btn btn-primary edit"%>
     	<%= link_to "Delete", author, method: :delete,

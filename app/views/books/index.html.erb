@@ -1,6 +1,6 @@
 <h1>All Books</h1> 
 <%= render "shared/search"%>
-<% if current_user.role ==1 && !current_user?(@user) %>
+<% if logged_in? && current_user.role ==1 && !current_user?(@user) %>
 	<span><h2><%= link_to "Add Book", new_book_path%></h2></span>
 <%= will_paginate %>
 <% end %>
