@@ -15,6 +15,7 @@ gem 'will_paginate-bootstrap'
 gem 'bootstrap-sass', '~> 3.4', '>= 3.4.1'
 gem 'ransack' #gem search
 gem 'to_xls-rails' #export excel
+gem 'paperclip', '~> 6.1' #image
 gem 'sassc-rails', '>= 2.1.0'
 
 gem 'uglifier', '>= 1.3.0'

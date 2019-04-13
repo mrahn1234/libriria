@@ -2,11 +2,12 @@
 <%= render "shared/search"%>
 <% if logged_in? && current_user.role ==1 && !current_user?(@user) %>
 	<span><h2><%= link_to "Add Book", new_book_path%></h2></span>
-<%= will_paginate %>
 <% end %>
-<ul class="books">
+
+<%= will_paginate %>
+
+<ul class="row">
      <%= render @books %>     
 </ul> 
-
 <%= will_paginate %>
 

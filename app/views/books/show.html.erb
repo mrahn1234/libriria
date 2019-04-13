@@ -1,29 +1,33 @@
-
 <% provide :title, @book.name %>
-<h1><%= @book.name %></h1>
-
-<div class="container">
-    <dl>
-    <dt>Author:</dt><dd><%= link_to @book.author.name, @book.author %></dd><br>
-    <dt>Category:</dt><dd>
-    	<% @book.categories.each do |c|%>
-    		  <%= link_to c.name, c%> |
-    	<% end %>
-    <dt>Publisher:</dt><dd><%= @book.publisher %></dd><br>
-    <dt>Page:</dt><dd><%= @book.page %></dd><br>
-    <dt>Quantity:</dt><dd><%= @book.quantity %></dd><br>
-  </dl>
-	<% if logged_in? && current_user.role ==1 && !current_user?(@user) %>
-	   <%= link_to "Edit", edit_book_path(@book), class: "btn btn-primary edit" %>
-     <%= link_to "Delete", @book, method: :delete, data: { confirm: "You sure?", remote: true },class: "delete_book btn btn-primary delete " %>
-  <% end %>
-  <% if logged_in? %>
-    <div class="borrow">
-        <%= link_to "Borrow", new_book_request_path(@book), class: "btn btn-primary borrow"%>
-    </div>
-  <% end %>
+<div class ="row" style="padding-top: 30px;">
+  <div class = "col-md-4">
+    <%= image_tag @book.book_img.url(:book_show), class: "book-show"%>
+  </div>
+   
+  <div class="col-md-8">
+    <h3>Title: <%= @book.name %></h3>
+    <h3>Author: <%= link_to @book.author.name, @book.author %></h3>
+    <h3>
+      Category: <% @book.categories.each do |c|%>
+          <%= link_to c.name, c%> |
+      <% end %>
+    </h3>
+    <h3>Publisher: <%= @book.publisher %> </h33>
+    <h3>Page: <%= @book.page %></h3>
+    <h3>Quantity: <%= @book.quantity %> </h3>
+    <% if logged_in? && current_user.role ==1 && !current_user?(@user) %>
+       <%= link_to "Edit", edit_book_path(@book), class: "btn btn-primary edit" %>
+       <%= link_to "Delete", @book, method: :delete, data: { confirm: "You sure?", remote: true },class: "delete_book btn btn-primary delete " %>
+    <% end %>
+    <% if logged_in? %>
+      <div class="borrow">
+          <%= link_to "Borrow", new_book_request_path(@book), class: "btn btn-primary borrow"%>
+      </div>
+    <% end %>
   
-  <div>
-    <%= render 'follow_book_form' if logged_in? %>
+    <div>
+      <%= render 'follow_book_form' if logged_in? %>
+    </div>
   </div>
 </div>
+	

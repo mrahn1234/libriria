@@ -1,10 +1,16 @@
-<li> 
-   <%= link_to book.name , book %>
-   <% if logged_in? && current_user.role ==1 && !current_user?(@user) %>
-   		<span>
-   	 		<%= link_to "Edit", edit_book_path(book), class: "btn btn-primary edit" %>
-   			 <%= link_to "Delete", book, method: :delete, data: { confirm: "You sure?", remote: true },class: "delete_book btn btn-primary delete " %>
-   		</span>
-   <% end %>
+<li class="col-12 col-md-6 col-lg-3" style="padding: 50px 0px"> 
+   
+  <div class="cnt-block equal-hight" style="height: 349px;">
+      <figure>
+      	<a href="/books/<%= book.id %>">
+      		<%= image_tag book.book_img.url(:book_index), class: "book"%>
+      	</a>
+      		
+      </figure>
+   		<%= link_to book.name , book %>
+  
+	  <ul class="follow-us clearfix">
+	  	
+	  </ul>
+  </div>
 </li>
-

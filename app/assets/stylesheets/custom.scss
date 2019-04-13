@@ -12,7 +12,13 @@ $gray-medium-light: #eaeaea;
   box-sizing:         border-box;
 }
 
-
+@mixin background-tile {
+  box-sizing: border-box;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 3px 3px 5px 6px #ccc;
+  padding: 1.5em 1.25em;
+}
 
 
 /* universal */
@@ -381,3 +387,32 @@ body {
   }
 }
 
+// soto
+.row.heading h2 {
+    color: #fff;
+    font-size: 52.52px;
+    line-height: 95px;
+    font-weight: 400;
+    text-align: center;
+    margin: 0 0 40px;
+    padding-bottom: 20px;
+    text-transform: uppercase;
+}
+ul{
+  margin:0;
+  padding-left:30px;
+  list-style:none;
+
+}
+// book
+.book{
+  height: 350px;
+  width: 250px;
+  @include background-tile;
+}
+.book-show
+{
+  height: 450px;
+  width: 325px;
+   @include background-tile;
+}

@@ -21,13 +21,14 @@ class RequestsController < ApplicationController
 	end
 
 	def create
-		@request= Request.new(request_params)
-		@request.book_id = @book.id
+
+		# @request= Request.new(request_params)
+		# @request.book_id = @book.id
+		@request = @book.requests.build(request_params)
 		@request.user_id = current_user.id
 		@request.datefrom  = Time.zone.now
 		# @book.quantity -= @request.number
 		# @book.save
-
 		if @request.save
 			redirect_to requests_url
 		else
