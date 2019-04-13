@@ -102,5 +102,14 @@ class User < ApplicationRecord
 		dem = follows.where(target_id: author.id, target_type: "Author").count
 		dem == 1
 	end
+	def like_book(book)
+		liked_books << book
+	end
+	def unlike_book(book)
+		liked_books.delete(book)
+	end
+	def like_book?(book)
+		liked_books.include?(book)
+	end
 end
 

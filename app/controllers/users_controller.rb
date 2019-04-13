@@ -87,6 +87,12 @@ class UsersController < ApplicationController
     @authors = @user.following_authors.paginate(page: params[:page])
     render 'show_follow_author'
   end
+  def likebook
+    @title = "Like Books"
+    @user = User.find(params[:id])
+    @books = @user.liked_books.paginate(page: params[:page])
+    render 'show_like_book'
+  end
 
   private
 

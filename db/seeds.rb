@@ -52,12 +52,16 @@ books.each do |book|
 end
 
 #LikeBookUser
-users= User.all
-users.each do |user|
-  user.liked_books << Book.all[rand(Book.all.count)]
-end
+user1 = User.first
+user2 = User.second
+books = Book.all
+likebook = books[1..20]
+likebook.each { |book| user1.like_book(book) }
+likebook = books[15..30]
+likebook.each { |book| user2.like_book(book)}
 
 #Review
+users = User.all
 users.each do |user|
     rating = rand(1..5)
     content = Faker::Quotes::Shakespeare.as_you_like_it_quote 

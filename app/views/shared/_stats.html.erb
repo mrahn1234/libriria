@@ -23,5 +23,11 @@
    <%= @user.follows.where(target_type: "Author").count %>
    </strong>
    following author
- </a> 
+ </a>
+  <a  href="<%= likebook_user_path(@user) %>">
+   <strong id ="likebook" class="stat">
+   <%= @user.liked_books.count %>
+   </strong>
+   liked books
+ </a>  
 </div> 
