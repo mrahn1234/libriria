@@ -416,3 +416,14 @@ ul{
   width: 325px;
    @include background-tile;
 }
+.book_cart
+{
+  height: 100px;
+  width: 70px;
+}
+.btn.btn-warning
+{
+  float: right;
+  margin-right: 60px;
+  margin-bottom: 60px;
+}

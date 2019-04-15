@@ -9,7 +9,7 @@
     <h3>Author: <%= link_to @book.author.name, @book.author %></h3>
     <h3>
       Category: <% @book.categories.each do |c|%>
-          <%= link_to c.name, c%> |
+          <%= link_to c.name, c%> 
       <% end %>
     </h3>
     <h3>Publisher: <%= @book.publisher %> </h33>
@@ -21,7 +21,7 @@
     <% end %>
     <% if logged_in? %>
       <div class="borrow">
-          <%= link_to "Borrow", new_book_request_path(@book), class: "btn btn-primary borrow"%>
+          <%= link_to "Borrow", new_book_request_detail_path(@book), class: "btn btn-primary borrow"%>
       </div>
     <% end %>
   

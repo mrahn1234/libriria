@@ -2,15 +2,24 @@
 <h1>List Request</h1>
 <% if logged_in? %> 
 	<%= will_paginate %>
-	<ul class="requests">
+	<table class="table">
+      <thead>
+        <tr>
+            <th>User</th>
+            <th>Amount of Book</th>
+            <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
 		<% if current_user.role ==1 && !current_user?(@user) %>
 		 	<%= render @requests %>
 		<% else %>
 		 	<%= render @requests.where(user_id: current_user.id)%>
 		<% end %>
-	</ul>
+      </tbody>
+	</table>
 	<%= will_paginate %>
 <% end %>
 
 
-
+ 

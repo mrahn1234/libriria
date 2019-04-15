@@ -13,18 +13,27 @@ Rails.application.routes.draw do
 	resources :categories
 	resources :authors
 	resources :books do
-		resources :requests
+		resources :request_details
 	end
 	#User
 	resources :users do
 		member do
 			get :following, :followers, :followingbook, :followingauthor
+			resources :carts
 		end
 	end
 	resources :requests do
     	member do
+	      get "confirm_request"
 	      get "accept_request"
 	      get "decline_request"
+	      get "cart"
+	      resources :request_details, only:[:destroy]
+    	end
+  	end
+  	resources :requests_details do
+    	member do
+	      
     	end
   	end
 	resources :relationships, only: [:create, :destroy] 

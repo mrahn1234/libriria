@@ -1,25 +1,30 @@
-<li>
-  <% if logged_in? %> 
-  	<%= link_to Book.find(request.book_id).name, request%>
-  	<% if request.verify == 0 %>
+<% if logged_in? && request.verify != 3%> 
+    <tr>
+      <td>
+        <%= User.find(request.user_id).name%>
+      </td>
+      <td>
+        <%= get_books_borrow(request.id) %> (<%= link_to "Detail",  cart_request_path(request) %>)
+      </td>
+     <% if request.verify == 0 %>
       <% if current_user.role ==1 && !current_user?(@user) %>
-    		<span>
-  	  		<%= link_to "Accept", accept_request_request_path(request), class: "btn btn-primary edit" %>
-  	    	<%= link_to "Decline", decline_request_request_path(request), class: "btn btn-primary delete" %>
-    		</span>
+        <td>
+          <%= link_to "Accept", accept_request_request_path(request) %> |
+          <%= link_to "Decline", decline_request_request_path(request) %>
+        </td>
       <% else %>
-        <span style="color: gray">Pending</span>
+        <td style="color: gray">Pending</td>
     <% end %>
-  	<%elsif request.verify == 1 %>
-  		<span style="color: green">
-	  		Accepted
-  		</span>
-  	<% else %>
-  		<span style="color: red">
-	  		Declined
-  		</span>
+    <%elsif request.verify == 1 %>
+      <td style="color: green">
+        Accepted
+      </td>
+    <% else %>
+      <td style="color: red">
+        Declined
+      </td>  
   	<% end %>
-  	
-  <% end %>
-</li>
+  </tr>
+<% end %>
+
 

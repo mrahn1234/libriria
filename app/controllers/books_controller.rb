@@ -32,7 +32,6 @@ class BooksController < ApplicationController
 
 	def create
 		@book= Book.new(book_params)
-		byebug
 		if @book.save
 			#Bookcategory.create!(book_id: @book.id, category_id: params[:book][:categories])
 			redirect_to @book

@@ -7,7 +7,7 @@ User.create!(name:  "admin",
              password_confirmation: "123456",
              role: 1)
 
-50.times do |n|
+30.times do |n|
   name  = Faker::Name.name
   email = "user-#{n+1}@gmail.com"
   password = "password"
@@ -19,7 +19,7 @@ User.create!(name:  "admin",
 end
 
 #Author
-50.times do |n|
+30.times do |n|
   name  = Faker::Name.name
   email = "author-#{n+1}@gmail.com"
   password = "password"
@@ -33,7 +33,7 @@ authors = Author.all
 authors.each do |author|
 	name = Faker::Book.title
   publisher = Faker::Book.publisher
-	quantity = 1000
+	quantity = 100
   page = rand(10..1000)
 	author.books.create!(name: name, quantity: quantity, publisher: publisher,page: page)
 end
@@ -68,8 +68,8 @@ end
 #User_Follow_User
 users = User.all
 user  = users.first
-following = users[2..50]
-followers = users[3..40]
+following = users[2..30]
+followers = users[3..30]
 following.each { |followed| user.follow(followed) }
 followers.each { |follower| follower.follow(user) }
 

@@ -10,8 +10,8 @@ class User < ApplicationRecord
 	has_many :reviews, dependent: :destroy
 	has_many :reviewed_books, through: :reviews, source: :book
 	#OneToMany Request pending shopee..
-	#has_many :requests, dependent: :destroy
 	has_many :requests, dependent: :destroy
+	#has_many :requests, dependent: :destroy
 	has_many :book, through: :request
 	#ManytoMany User_follow
 	has_many :active_relationships, class_name: "Relationship",

@@ -12,8 +12,8 @@ class Book < ApplicationRecord
 	#Many to Many Poly Follow book, author
 	has_many :follows, as: :target, dependent: :destroy
 	#ManytoMany _Request details
-	#has_many :request_details, dependent: :destroy
-	has_many :requests , dependent: :destroy
+	has_many :request_details, dependent: :destroy
+	#has_many :requests , dependent: :destroy
 	has_many :users, through: :requests
 
 	#Validate

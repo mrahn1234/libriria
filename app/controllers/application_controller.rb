@@ -12,4 +12,12 @@ class ApplicationController < ActionController::Base
         redirect_to login_url
       end
     end
+
+    def current_request
+        if session[:request_id]
+          Request.find(session[:request_id])
+        else
+          current_user.requests.build
+        end
+    end
 end

@@ -1,39 +1,23 @@
 class RequestsController < ApplicationController
 
-	before_action :find_book, only: [:new, :create]
-	before_action :find_request, only: [:update_quantity, :accept_request,:decline_request,:show]
-	#before_action :find_user, only: [:new, :create]
 
+	before_action :find_request, only: [:update_quantity,:confirm_request,:cart,:accept_request,:decline_request,:show]
+	# #before_action :find_user, only: [:new, :create]
+
+		
 	def index
-		@requests = Request.order("created_at DESC").page(params[:page])
+		@q = Request.ransack(params[:q])
+    	@requests = @q.result.order("created_at DESC").page(params[:page])
 	end
 
-	def show
-		@user = User.find(@request.user_id)
-		@book = Book.find(@request.book_id)
-	end
-
-
-	def new
-		@user = current_user
-		@request = Request.new
-		# byebug
-	end
-
-	def create
-
-		# @request= Request.new(request_params)
-		# @request.book_id = @book.id
-		@request = @book.requests.build(request_params)
-		@request.user_id = current_user.id
-		@request.datefrom  = Time.zone.now
-		# @book.quantity -= @request.number
-		# @book.save
+	def confirm_request
+		@request.verify = 0
 		if @request.save
-			redirect_to requests_url
+			flash[:sucess] = "Your request have been send to admin, please wait progess"
+			redirect_to root_url
 		else
-			render 'new' 
-		end 
+			flash[:danger] = "Your request can't be confirmed"
+		end
 	end
 
 	def accept_request
@@ -41,7 +25,7 @@ class RequestsController < ApplicationController
 	    if @request.save
 	    	update_quantity
 	    	flash[:sucess] = "Accept request"
-	    end
+		end
 	    redirect_to requests_url
   	end
 
@@ -53,35 +37,25 @@ class RequestsController < ApplicationController
 	    redirect_to requests_url
   	end
 
-  	def return_book
-  		
+  	def cart
+  		@request_details = RequestDetail.where(request_id: @request.id)	
   	end
-	private
-		def find_book
-			@book = Book.find(params[:book_id])
-		end
 
-		def find_user
-			@user = User.find[params[:user_id]]
-		end
+  	private	
 
-		def find_request
-			@request = Request.find(params[:id])
-		end
-
-		def request_params
-			params.require(:request).permit(:number,:dateto)
-		end
-
+  		def find_request
+  			@request = Request.find(params[:id])
+  		end
 		def update_quantity
-			# byebug
-			@book = Book.find(@request.book_id)
-			if @book.quantity >= @request.number
-				@book.quantity -= @request.number
-				@book.save
-			end
+			@requests_detail = RequestDetail.where(request_id: @request.id)
+			@requests_detail.each do |request_detail|
+				@book = Book.find(request_detail.book_id)
+				if @book.quantity >= request_detail.number
+					@book.quantity -= request_detail.number
+					@book.save
+				end
+			end	
 			
 		end
-
 
 end

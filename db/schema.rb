@@ -82,18 +82,22 @@ ActiveRecord::Schema.define(version: 2019_04_13_055847) do
   end
 
   create_table "request_details", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-  end
-
-  create_table "requests", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "verify", default: 0
+    t.integer "number"
     t.datetime "datefrom"
     t.datetime "dateto"
-    t.integer "number"
-    t.bigint "user_id"
+    t.bigint "request_id"
     t.bigint "book_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["book_id"], name: "index_requests_on_book_id"
+    t.index ["book_id"], name: "index_request_details_on_book_id"
+    t.index ["request_id"], name: "index_request_details_on_request_id"
+  end
+
+  create_table "requests", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "verify", default: 3
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_requests_on_user_id"
   end
 
@@ -123,7 +127,8 @@ ActiveRecord::Schema.define(version: 2019_04_13_055847) do
   add_foreign_key "books", "authors"
   add_foreign_key "likes", "books"
   add_foreign_key "likes", "users"
-  add_foreign_key "requests", "books"
+  add_foreign_key "request_details", "books"
+  add_foreign_key "request_details", "requests"
   add_foreign_key "requests", "users"
   add_foreign_key "reviews", "books"
   add_foreign_key "reviews", "users"
