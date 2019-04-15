@@ -2,9 +2,8 @@
 <h1><%= @category.name+"(#{@category.books.count})" %></h1>
 
 <div>
-  <ul class="books">
-       <%= render "book"%>     
+  <ul class="row">
+       <%= render @books %>     
   </ul> 
-  <h2><%= link_to "Add book", new_book_path %></h2>
 </div>
 

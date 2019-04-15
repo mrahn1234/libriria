@@ -29,13 +29,16 @@ end
 end
 
 #Books
+i =1 
 authors = Author.all
 authors.each do |author|
 	name = Faker::Book.title
   publisher = Faker::Book.publisher
 	quantity = 100
   page = rand(10..1000)
-	author.books.create!(name: name, quantity: quantity, publisher: publisher,page: page)
+  image = File.open("#{Rails.root}/app/assets/images/#{i}.jpg")
+  i = i +1
+	author.books.create!(name: name, quantity: quantity, publisher: publisher,page: page, book_img: image)
 end
 
 Category

@@ -1,5 +1,5 @@
-<% provide(:title, "My Cart") %>
-<% if logged_in? && current_user.role == 1 %> 
+<% provide(:title, "Request") %>
+<% if logged_in? %> 
   <h1>Cart of <%= link_to User.find(@request.user_id).name%></h1>
 	<table class="table">
       <thead>

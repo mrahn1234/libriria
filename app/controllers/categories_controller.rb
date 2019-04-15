@@ -7,7 +7,9 @@ class CategoriesController < ApplicationController
     @categories = @q.result.order("created_at DESC").page(params[:page])
   end
 
-  def show;end
+  def show
+      @books = @category.books
+  end
 
   def new
     @category = Category.new

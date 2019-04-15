@@ -1,9 +1,7 @@
 Rails.application.routes.draw do
 
-	get 'requests/new'
-	get 'requests/create'
 	root 'static_pages#home'
-		get 'help'  =>  'static_pages#help'
+	get 'help'  =>  'static_pages#help'
 	get    '/login',   to: 'sessions#new'
 	post   '/login',   to: 'sessions#create'
 	delete '/logout',  to: 'sessions#destroy'

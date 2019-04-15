@@ -11,7 +11,9 @@
    <%= @user.followers.count %>
    </strong>
    followers
- </a> 
+ </a>
+</div>
+<div>
   <a  href="<%= followingbook_user_path(@user) %>">
    <strong id ="followingbook" class="stat">
    <%= @user.follows.where(target_type: "Book").count %>
@@ -25,3 +27,4 @@
    following author
  </a> 
 </div> 
+  
