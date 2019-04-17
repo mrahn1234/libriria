@@ -9,9 +9,8 @@ class CartsController < ApplicationController
 
 	def index
 		return unless @request
-		@request_details = RequestDetail.where(request_id: @request.id)	
+		@request_details = RequestDetail.where(request_id: @request.id).order("created_at DESC")	
 		@books = Book.where(id: @request_details.ids)
-		
 	end
 
 	private
