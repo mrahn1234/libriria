@@ -8,16 +8,13 @@ Rails.application.routes.draw do
 	get '/users/:id/edit' => 'users#edit'
 	get '/signup' => 'users#new'
 	post '/signup' => 'users#create'
-	resources :categories
-	resources :authors
 	resources :books do
 		resources :request_details
 	end
 	#User
 	resources :users do
 		member do
-			get :following, :followers, :followingbook, :followingauthor
-			resources :carts
+			get :following, :followers, :followingbook, :followingauthor, :likebook
 		end
 	end
 	resources :requests do
@@ -37,6 +34,9 @@ Rails.application.routes.draw do
   	end
 	resources :relationships, only: [:create, :destroy] 
 	resources :follows, only: [:create, :destroy]
+	resources :categories
+	resources :authors
+	resources :likes, only: [:create, :destroy]
 
   
 end
