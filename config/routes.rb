@@ -26,6 +26,7 @@ Rails.application.routes.draw do
 	      get "accept_request"
 	      get "decline_request"
 	      get "cart"
+	      # resources :carts, only: [:index]
 	      resources :request_details, only:[:destroy]
     	end
   	end

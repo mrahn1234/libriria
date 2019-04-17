@@ -1,9 +1,9 @@
 class RequestDetailsController < ApplicationController
 
 	before_action :find_book, only: [:new, :create]
-	before_action :find_user, only: [:new, :create]
+	before_action :find_user, only: [:new, :create,]
 	before_action :find_request_detail, only: [:show, :destroy]
-	before_action :find_request, only: [:update_quantity, :accept_request,:decline_request,:show]
+	before_action :find_request, only: [:update_quantity, :accept_request,:decline_request,:show,:destroy]
 	#before_action :find_user, only: [:new, :create]
 
 	def index
@@ -38,11 +38,11 @@ class RequestDetailsController < ApplicationController
 	end
 
 	def destroy
-		@request_detail.destroy if redirect_to carts_url
-
-		# respond_to do |format|
-	 #      format.js {redirect_to destroy.js}
-  #   	end
+		if current_user.role == 2 
+			redirect_to carts_url if @request_detail.destroy
+		else
+			redirect_to cart_request_path(@request) if @request_detail.destroy
+		end
 	end
 	
 	private
@@ -55,7 +55,7 @@ class RequestDetailsController < ApplicationController
 		end
 
 		def find_request
-			@request = Request.find(params[:id])
+			@request = Request.find(@request_detail.request.id)
 		end
 
 		def find_request_detail

@@ -14,7 +14,7 @@ class RequestsController < ApplicationController
 		@request.verify = 0
 		if @request.save
 			flash[:sucess] = "Your request have been send to admin, please wait progess"
-			redirect_to root_url
+			redirect_to requests_url
 		else
 			flash[:danger] = "Your request can't be confirmed"
 		end
