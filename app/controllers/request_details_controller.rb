@@ -31,6 +31,7 @@ class RequestDetailsController < ApplicationController
 		end
 		if @request_detail.save
 			redirect_to books_url
+			flash[:success] = "Added to cart"
 		else
 			render "new"
 		end
