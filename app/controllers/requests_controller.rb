@@ -13,6 +13,7 @@ class RequestsController < ApplicationController
 	def confirm_request
 		@request.verify = 0
 		if @request.save
+			RequestMailer.borrow_email(current_user,@request).deliver
 			flash[:sucess] = "Your request have been send to admin, please wait progess"
 			redirect_to requests_url
 		else
@@ -23,6 +24,7 @@ class RequestsController < ApplicationController
 	def accept_request
 	    @request.verify = 1
 	    if @request.save
+	    	RequestMailer.reply_email(@request).deliver
 	    	update_quantity
 	    	flash[:sucess] = "Accept request"
 		end
@@ -32,6 +34,7 @@ class RequestsController < ApplicationController
   	def decline_request
 	    @request.verify = 2
 	    if @request.save
+	    	RequestMailer.reply_email(@request).deliver
 	    	flash[:danger] = "Decline request"
 	    end
 	    redirect_to requests_url
