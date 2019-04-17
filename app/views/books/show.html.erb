@@ -12,7 +12,7 @@
           <%= link_to c.name, c%> 
       <% end %>
     </h3>
-    <h3>Publisher: <%= @book.publisher %> </h33>
+    <h3>Publisher: <%= @book.publisher %> </h3>
     <h3>Page: <%= @book.page %></h3>
     <h3>Quantity: <%= @book.quantity %> </h3>
     <% if logged_in? && current_user.role ==1 && !current_user?(@user) %>

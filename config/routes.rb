@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 	#User
 	resources :users do
 		member do
+			resources :carts
 			get :following, :followers, :followingbook, :followingauthor, :likebook
 		end
 	end

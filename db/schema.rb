@@ -125,11 +125,8 @@ ActiveRecord::Schema.define(version: 2019_04_13_055847) do
   add_foreign_key "bookcategories", "categories"
   add_foreign_key "books", "authors"
   add_foreign_key "likes", "books"
-
-  add_foreign_key "likes", "users"
   add_foreign_key "request_details", "books"
   add_foreign_key "request_details", "requests"
-  add_foreign_key "requests", "books"
   add_foreign_key "requests", "users"
   add_foreign_key "reviews", "books"
   add_foreign_key "reviews", "users"

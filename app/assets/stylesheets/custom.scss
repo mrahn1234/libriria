@@ -412,9 +412,9 @@ ul{
 }
 .book-show
 {
-  height: 450px;
-  width: 325px;
-   @include background-tile;
+  height: 480px;
+  width: 350px;
+  @include background-tile;
 }
 .book_cart
 {
@@ -427,8 +427,8 @@ ul{
   margin-right: 60px;
   margin-bottom: 60px;
 }
-.book .user
-{
-  height: 100px;
-  width: 70px;
-}
+// .book .user
+// {
+//   height: 100px;
+//   width: 70px;
+// }
