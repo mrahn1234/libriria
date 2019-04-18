@@ -432,3 +432,20 @@ ul{
 //   height: 100px;
 //   width: 70px;
 // }
+
+.star-rating
+{
+   border-bottom: 1px solid rgba(0,0,0,.09);
+   padding: 1rem 0;
+   padding-left: 1.25rem;
+   img
+   {
+     margin-top: .375rem;
+   }
+}
+.btn.btn-danger
+{
+  margin-top: 10px;
+  width: 350px;
+
+}

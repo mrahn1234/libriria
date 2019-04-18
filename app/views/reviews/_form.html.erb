@@ -1,0 +1,25 @@
+
+<%= form_for(@review) do |f| %>
+
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+  
+  <%= f.label :point %>
+  <div class="field">
+    <div id="star-rating"></div>
+  </div>
+  <%= f.label :comment %>
+  <%= f.text_area :comment, class: 'text-area' %>
+  <%= f.hidden_field :book_id %>
+  <%= f.hidden_field :user_id%>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: "btn btn-primary" %>
+  </div>
+<% end %>
+
+<script>
+	  $('#star-rating').raty({
+	    path: '/assets/',
+	    scoreName: 'review[rating]'
+	  });
+</script>

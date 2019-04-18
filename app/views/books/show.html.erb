@@ -2,28 +2,57 @@
 <div class ="row" style="padding-top: 30px;">
   <div class = "col-md-4">
     <%= image_tag @book.book_img.url(:book_show), class: "book-show"%>
+    <%= link_to "Add Review", new_book_review_path(@book), class: "btn btn-danger" %>
+    <div style="margin-top: 30px;">
+          <% @book.reviews.each do |r| %>
+              <div class="star-rating" data-score= "<%= r.rating %>">
+               <strong> From - <%= link_to r.user.name, r.user %></strong>
+               <p><%= r.comment %></p>
+              <% if logged_in? && current_user?(r.user) %>
+                <p><%= link_to "Edit", edit_review_path(r),class: "glyphicon glyphicon-pencil"  %> 
+                <%= link_to "Delete", review_path(r), method: :delete, class:"glyphicon glyphicon-trash" %> 
+                </p>
+              <% end %>
+              </br>
+            </div>
+          <% end %>    
+    </div>
+
+
   </div>
    
   <div class="col-md-8">
-    <h3>Title: <%= @book.name %></h3>
-    <h3>Author: <%= link_to @book.author.name, @book.author %></h3>
-    <h3>
+    <h4>Title: <%= @book.name %></h4>
+    
+    
+    <h4>Author: <%= link_to @book.author.name, @book.author %></h4>
+    <h4>
       Category: <% @book.categories.each do |c|%>
           <%= link_to c.name, c%> 
       <% end %>
-    </h3>
-    <h3>Publisher: <%= @book.publisher %> </h3>
-    <h3>Page: <%= @book.page %></h3>
-    <h3>Quantity: <%= @book.quantity %> </h3>
-    <% if logged_in? && current_user.role ==1 && !current_user?(@user) %>
-       <%= link_to "Edit", edit_book_path(@book), class: "btn btn-primary edit" %>
-       <%= link_to "Delete", @book, method: :delete, data: { confirm: "You sure?", remote: true },class: "delete_book btn btn-primary delete " %>
-    <% end %>
+    </h4>
+    <h4>Publisher: <%= @book.publisher %> </h4>
+    <h4>Page: <%= @book.page %></h4>
+    <h4>Quantity: <%= @book.quantity %> </h4>
+    <h4>Rating:</h4>
+    <% if @book.reviews.blank?%>
+    <div class= "star-rating" data-score= <%= 0  %> ></div>
+    <em><%= "#{@book.reviews.length} reviews" %></em>
+    <% else%>
+     <%# <div class="star-rating" data-score= <%= @book.reviews.average(:rating).round(2) %>  
+     <div class= "star-rating" data-score= <%= @book.reviews.average(:rating).round(2)  %> ></div>
+     <em><%= "#{@book.reviews.length} reviews" %></em>
+    <% end %> 
+    </br>
     <% if logged_in? %>
-      <div class="borrow">
-          <%= link_to "Borrow", new_book_request_detail_path(@book), class: "btn btn-primary borrow"%>
-      </div>
+
+         <%= link_to "Borrow", new_book_request_detail_path(@book), class: "btn btn-primary borrow"%>
+       <% if current_user.role ==1 && !current_user?(@user) %>
+         <%= link_to "Edit", edit_book_path(@book), class: "btn btn-primary edit" %>
+         <%= link_to "Delete", @book, method: :delete, data: { confirm: "You sure?", remote: true },class: "delete_book btn btn-primary delete " %>
+       <% end %>    
     <% end %>
+
   
     <div>
       <%= render 'follow_book_form' if logged_in? %>
@@ -31,6 +60,13 @@
     <div>
       <%= render 'like_form' if logged_in? %>
     </div>
-  </div>
 </div>
-	
+<script>
+  $('.star-rating').raty({
+      path: '/assets/',
+      readOnly: true,
+      score: function() {
+        return $(this).attr('data-score');
+      }
+  });
+</script>

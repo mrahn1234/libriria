@@ -13,7 +13,15 @@ class BooksController < ApplicationController
 	end
 
 	
-	def show;end
+	def show
+		@reviews = Review.where(book_id: @book_id).order("created_at DESC")
+
+		if @reviews.blank?
+			@book.point = 0
+		else
+			@book.point = @book.reviews.average(:rating).round(2)
+		end
+	end
 
 	def edit; end
 
