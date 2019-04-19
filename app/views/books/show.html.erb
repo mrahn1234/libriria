@@ -2,19 +2,23 @@
 <div class ="row" style="padding-top: 30px;">
   <div class = "col-md-4">
     <%= image_tag @book.book_img.url(:book_show), class: "book-show"%>
-    <%= link_to "Add Review", new_book_review_path(@book), class: "btn btn-danger" %>
-    <div style="margin-top: 30px;">
+      <% if @book.reviews.where(user_id: current_user.id).count == 0 %>
+        <%= link_to "Add Review", new_book_review_path(@book), class: "btn btn-danger" %>
+      <% else %>
+        <%= link_to "Edit Review", edit_review_path(@book.reviews.find_by(user_id: current_user.id)), class: "btn btn-danger" %>
+      <% end %>
+          <div style="margin-top: 30px;">
           <% @book.reviews.each do |r| %>
-              <div class="star-rating" data-score= "<%= r.rating %>">
-               <strong> From - <%= link_to r.user.name, r.user %></strong>
-               <p><%= r.comment %></p>
-              <% if logged_in? && current_user?(r.user) %>
-                <p><%= link_to "Edit", edit_review_path(r),class: "glyphicon glyphicon-pencil"  %> 
-                <%= link_to "Delete", review_path(r), method: :delete, class:"glyphicon glyphicon-trash" %> 
-                </p>
-              <% end %>
-              </br>
-            </div>
+              <div>
+                <strong> From - <%= link_to r.user.name, r.user %></strong>
+                <div class="star-rating" data-score="<%= r.rating %>"> </div>
+                <div style="margin-left: 13px;"><p><%= r.comment %></p></div>
+                <% if logged_in? && current_user?(r.user) %>
+                  <p><%= link_to "Edit", edit_review_path(r),class: "glyphicon glyphicon-pencil"  %> 
+                    <%= link_to "Delete", review_path(r), method: :delete, class: "glyphicon glyphicon-trash" %> 
+                  </p>
+                <% end %>
+             </div>
           <% end %>    
     </div>
 

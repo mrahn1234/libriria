@@ -408,6 +408,7 @@ ul{
 .book{
   height: 350px;
   width: 250px;
+  margin: 5px 0px;
   @include background-tile;
 }
 .book-show

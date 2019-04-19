@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-  	resources :reviews
 	root 'static_pages#home'
 	get 'help'  =>  'static_pages#help'
 	get    '/login',   to: 'sessions#new'
@@ -17,7 +16,7 @@ Rails.application.routes.draw do
 	#User
 	resources :users do
 		member do
-			resources :carts
+			resources :carts, only: [:index]
 			get :following, :followers, :followingbook, :followingauthor, :likebook
 		end
 	end
@@ -33,7 +32,6 @@ Rails.application.routes.draw do
   	end
   	resources :requests_details do
     	member do
-	      
     	end
   	end
 	resources :relationships, only: [:create, :destroy] 
@@ -41,8 +39,6 @@ Rails.application.routes.draw do
 	resources :categories
 	resources :authors
 	resources :likes, only: [:create, :destroy]
+	resources :reviews
 	
-
-	
-  
 end

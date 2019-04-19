@@ -1,6 +1,6 @@
 <% provide(:title, "Request") %>
 <% if logged_in? %> 
-  <h1>Cart of <%= link_to User.find(@request.user_id).name%></h1>
+<h1>Cart of <%= link_to @user.name, @user%></h1>
 	<table class="table">
       <thead>
         <tr>

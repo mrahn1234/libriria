@@ -27,7 +27,7 @@ class RequestDetailsController < ApplicationController
 		if @user.requests.last && @user.requests.last.verify == 3
 			@request_detail.request_id = @user.requests.last.id
 		else
-			@request_detail.request_id = @user.requests.create.id
+			@request_detail.request_id = (@user.requests.create).id
 		end
 		if @request_detail.save
 			redirect_to books_url

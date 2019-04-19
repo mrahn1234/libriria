@@ -1,8 +1,9 @@
 <% provide(:title, 'All users') %>
 <h1>All users</h1>
 <%= render "search"%>
-
-<%= render "excel" %>
+<% if logged_in? && current_user.role == 1 %>
+	<%= render "excel" %>
+<% end %>
 
 <%= will_paginate %>
 

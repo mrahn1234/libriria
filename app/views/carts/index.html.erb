@@ -1,6 +1,6 @@
 <% provide(:title, "My Cart") %>
 <% if logged_in? %> 
-	<% if (@request != nil && @request.verify ==3 && @request_details.count != 0) %>
+	<% if (@request != nil && @request.verify == 3 && @request_details.count != 0) %>
   <h1>Cart</h1>
 	<table class="table">
       <thead>

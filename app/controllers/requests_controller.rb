@@ -2,7 +2,7 @@ class RequestsController < ApplicationController
 
 
 	before_action :find_request, only: [:update_quantity,:confirm_request,:cart,:accept_request,:decline_request,:show]
-	# #before_action :find_user, only: [:new, :create]
+	 before_action :find_user, only: [:cart]
 
 		
 	def index
@@ -48,6 +48,9 @@ class RequestsController < ApplicationController
 
   		def find_request
   			@request = Request.find(params[:id])
+  		end
+  		def find_user
+  			@user = User.find_by(id: @request.user_id)
   		end
 		def update_quantity
 			@requests_detail = RequestDetail.where(request_id: @request.id)

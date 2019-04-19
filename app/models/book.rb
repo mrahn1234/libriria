@@ -5,8 +5,9 @@ class Book < ApplicationRecord
 	has_many :bookcategories, dependent: :destroy
 	has_many :categories, through: :bookcategories	#, source: :category
 	accepts_nested_attributes_for :bookcategories, allow_destroy: true
+	
  	#ManytoMany Book_Liked_User
-    has_many :likes, dependent: :destroy
+   	has_many :likes, dependent: :destroy
 	#ManytoMany Book_Reviewed
 	has_many :reviews, dependent: :destroy
 	#Many to Many Poly Follow book, author

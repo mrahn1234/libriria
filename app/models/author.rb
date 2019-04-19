@@ -18,4 +18,5 @@ class Author < ApplicationRecord
 			end
 		end
 	end
+	
 end

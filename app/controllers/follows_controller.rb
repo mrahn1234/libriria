@@ -18,7 +18,6 @@ class FollowsController < ApplicationController
     @follow = Follow.find params[:id]
   	@target = @follow.target
     if @target.class.to_s == "Book"
-
       current_user.unfollow_book(@target)  
     else
       current_user.unfollow_author(@target)

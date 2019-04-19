@@ -13,8 +13,7 @@ class BooksController < ApplicationController
 
 	
 	def show
-		@reviews = Review.where(book_id: @book_id).order("created_at DESC")
-
+		@reviews = Review.where(book_id: @book_id).order("created_at DESC")	
 		if @reviews.blank?
 			@book.point = 0
 		else
@@ -40,19 +39,19 @@ class BooksController < ApplicationController
 	def create
 		@book= Book.new(book_params)
 		if @book.save
-			#Bookcategory.create!(book_id: @book.id, category_id: params[:book][:categories])
 			redirect_to @book
+			flash[:success] = "Create book success"
 		else
 			render 'new'
+			flash[:danger] = "Creating book failed"
 		end
 	end
 
 
 	def destroy
-		@book.destroy
-		respond_to do |format|
-	      format.js
-    	end
+		return unless @book.destroy
+		redirect_to books_url
+		flash[:success] = "Deleted book success"
 	end
 
 	private
@@ -60,12 +59,8 @@ class BooksController < ApplicationController
 	def book_params
 		params.require(:book).permit(:name, :quantity, :publisher, 
 			:page, :author_id, :book_img,  
-			bookcategories_attributes: [:category_id,:_destroy])	
+			bookcategories_attributes: [:book_id,:category_id,:_destroy])	
 	end
-
-	# def list_categories
- #  		@categories = Category.all.select(:id, :name).map{|category| [category.name, category.id]}
- # 	end
 
 	def find_book
 		@book = Book.find(params[:id])
