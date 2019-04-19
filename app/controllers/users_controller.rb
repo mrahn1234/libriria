@@ -5,6 +5,10 @@ class UsersController < ApplicationController
   def index
     @q = User.ransack(params[:q]) 
    	@users = @q.result.order("created_at DESC").page(params[:page])
+    respond_to do |format|
+        format.html
+        format.xls{send_data @users.to_csv(col_sep: "\t")}
+      end
   end
 
   def new

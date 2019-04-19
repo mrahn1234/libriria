@@ -1,0 +1,12 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= search_form_for(@q) do |f| %>
+	  	<%= f.label :Search_by_name%>
+	  	<%= f.search_field :name_cont,  class: 'form-control'%>
+
+	  	<%= f.label :Search_by_role%>
+	  	<%= f.search_field :role_eq,  class: 'form-control'%>
+	  	<%= f.submit "Search", class: "btn btn-primary" %>
+	<% end %>
+  </div>
+</div>

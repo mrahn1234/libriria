@@ -1,7 +1,8 @@
 <h1>All Books</h1> 
 <%= render "shared/search"%>
 <% if logged_in? && current_user.role ==1 && !current_user?(@user) %>
-	<span><h2><%= link_to "Add Book", new_book_path%></h2></span>
+	<h3 style="text-align: center;"><%= link_to "BOOK", new_book_path, class: "glyphicon glyphicon-plus"%></h3>
+	<span><%=render "excel" %></span>
 <% end %>
 
 <%= will_paginate %>

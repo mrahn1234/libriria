@@ -3,7 +3,8 @@
 <%= render "shared/search"%>
 <% if logged_in? && current_user.role == 1 && !current_user?(@user)  %>
 	<div> 
-    	<span><h2><%= link_to "Add Category", new_category_path%></h2></span>
+    	<h3 style="text-align: center;"><%= link_to "CATEGORY", new_category_path, class: "glyphicon glyphicon-plus"%></h3>
+    	<span><%=render "excel" %></span>
   	</div>
 <%end%>
 <%= will_paginate %>

@@ -84,32 +84,48 @@ class User < ApplicationRecord
 	def follow_book(book)
 		follows.build(target_id: book.id, target_type: "Book").save
 	end
+
 	def follow_author(author)
 		follows.build(target_id: author.id, target_type: "Author").save
 	end
+
 	def unfollow_book(book)
 		follows.find_by(target_id: book.id, target_type: "Book").destroy
-
 	end
+
 	def unfollow_author(author)
 		follows.find_by(target_id: author.id, target_type: "Author").destroy
 	end
+
 	def following_book?(book)
 		dem = follows.where(target_id: book.id, target_type: "Book").count
 		dem == 1
 	end
+
 	def following_author?(author)
 		dem = follows.where(target_id: author.id, target_type: "Author").count
 		dem == 1
 	end
+
 	def like_book(book)
 		liked_books << book
 	end
+
 	def unlike_book(book)
 		liked_books.delete(book)
 	end
+
 	def like_book?(book)
 		liked_books.include?(book)
+	end
+
+	def self.to_csv(option ={})
+		CSV.generate(option) do |csv|
+			csv << column_names
+			all.each do |user|
+				csv << user.attributes.values_at(*column_names)
+			end
+		end
 	end
 end
 

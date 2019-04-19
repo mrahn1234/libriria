@@ -7,8 +7,7 @@ class BooksController < ApplicationController
     	@full_books = @q.result
     	respond_to do |format|
 	      format.html
-	      format.xls{send_data @full_authors.to_csv(col_sep: "\t")}
-	      format.js
+	      format.xls{send_data @full_books.to_csv(col_sep: "\t")}
     	end
 	end
 

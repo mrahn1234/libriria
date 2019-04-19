@@ -5,6 +5,12 @@ class CategoriesController < ApplicationController
   def index
     @q = Category.ransack(params[:q])
     @categories = @q.result.order("created_at DESC").page(params[:page])
+    @category_excel = @q.result
+    respond_to do |format|
+        format.html
+        format.xls{send_data @category_excel.to_csv(col_sep: "\t")}
+        format.js
+    end
   end
 
   def show

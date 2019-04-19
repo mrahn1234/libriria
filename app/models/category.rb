@@ -7,4 +7,12 @@ class Category < ApplicationRecord
 	#Validate
 	validates :name, presence: true, length: { maximum: 50 }
 	
+	def self.to_csv(option ={})
+		CSV.generate(option) do |csv|
+			csv << column_names
+			all.each do |category|
+				csv << category.attributes.values_at(*column_names)
+			end
+		end
+	end
 end

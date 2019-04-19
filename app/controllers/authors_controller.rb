@@ -6,11 +6,11 @@ class AuthorsController < ApplicationController
 		#@authors = Author.paginate(page: params[:page])
 		@q = Author.ransack(params[:q])
     	@authors = @q.result.order("created_at DESC").page(params[:page])
-    	@full_authors = @q.result
+    	#@full_authors = @q.result
+    	# byebug
     	respond_to do |format|
 	      format.html
-	      format.xls{send_data @full_authors.to_csv(col_sep: "\t")}
-	      	
+	      format.xls{send_data @authors.to_csv(col_sep: "\t")}
     	end
 	end
 
