@@ -16,8 +16,22 @@
 //= require bootstrap
 //= require cocoon
 //= require activestorage
-//= require turbolinks
+// = require turbolinks
 //= require_tree .
 
 
-
+//=require main
+//=require accordion.min.js
+//=require bootstrap.min.js
+//=require bxslider.min.js
+//=require carousel.swipe.min.js
+//=require facts.counter.min.js
+//=require harvey.min.js
+//=require masonry.min.js
+//=require mixitup.min.js
+//=require mmenu.min.js
+//=require owl.carousel.min.js
+//=require responsive.table.min.js
+//=require responsive.tabs.min.js
+//=require waypoints.min.js
+//=require slick.js

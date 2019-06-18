@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_16_132744) do
+ActiveRecord::Schema.define(version: 2019_06_14_151336) do
 
   create_table "authors", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -18,6 +18,10 @@ ActiveRecord::Schema.define(version: 2019_04_16_132744) do
     t.string "info"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "author_img_file_name"
+    t.string "author_img_content_type"
+    t.bigint "author_img_file_size"
+    t.datetime "author_img_updated_at"
   end
 
   create_table "bookcategories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -36,6 +40,7 @@ ActiveRecord::Schema.define(version: 2019_04_16_132744) do
     t.string "publisher"
     t.integer "page"
     t.float "point"
+    t.string "content"
     t.bigint "author_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -52,83 +57,21 @@ ActiveRecord::Schema.define(version: 2019_04_16_132744) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "follows", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "user_id"
-    t.bigint "target_id"
-    t.string "target_type"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["target_type", "target_id"], name: "index_follows_on_target_type_and_target_id"
-    t.index ["user_id", "target_id", "target_type"], name: "index_follows_on_user_id_and_target_id_and_target_type", unique: true
-  end
-
-  create_table "likes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "user_id"
-    t.bigint "book_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["book_id"], name: "index_likes_on_book_id"
-    t.index ["user_id", "book_id"], name: "index_likes_on_user_id_and_book_id", unique: true
-  end
-
-  create_table "relationships", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "follower_id"
-    t.integer "followed_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["followed_id"], name: "index_relationships_on_followed_id"
-    t.index ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
-    t.index ["follower_id"], name: "index_relationships_on_follower_id"
-  end
-
-  create_table "request_details", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "number"
-    t.datetime "datefrom"
-    t.datetime "dateto"
-    t.bigint "request_id"
-    t.bigint "book_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["book_id"], name: "index_request_details_on_book_id"
-    t.index ["request_id"], name: "index_request_details_on_request_id"
-  end
-
-  create_table "requests", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "verify", default: 3
-    t.bigint "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_requests_on_user_id"
-  end
-
-  create_table "reviews", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "rating"
-    t.text "comment"
-    t.bigint "user_id"
-    t.bigint "book_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["book_id"], name: "index_reviews_on_book_id"
-    t.index ["user_id"], name: "index_reviews_on_user_id"
-  end
-
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
     t.string "name"
-    t.string "email"
     t.integer "role", default: 2
-    t.string "password_digest"
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "remember_digest"
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "bookcategories", "books"
   add_foreign_key "bookcategories", "categories"
   add_foreign_key "books", "authors"
-  add_foreign_key "likes", "books"
-  add_foreign_key "request_details", "books"
-  add_foreign_key "request_details", "requests"
-  add_foreign_key "requests", "users"
-  add_foreign_key "reviews", "books"
-  add_foreign_key "reviews", "users"
 end

@@ -3,6 +3,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.1'
 
+
+gem 'devise'
 gem 'rails', '~> 5.2.2', '>= 5.2.2.1'
 gem 'mysql2', '>= 0.4.4', '< 0.6.0'
 gem 'faker'
@@ -10,14 +12,17 @@ gem 'puma', '~> 3.11'
 gem 'sass-rails', '~> 5.0'
 gem 'cocoon'
 gem 'simple_form', '~> 4.1'
-gem 'will_paginate', '~> 3.1.1'
+gem 'will_paginate'
 gem 'will_paginate-bootstrap'
 gem 'bootstrap-sass', '~> 3.4', '>= 3.4.1'
-gem 'ransack' #gem search
+gem 'pagy' # thay the cho will_paginate va kaminari nhe hon
+#gem 'kaminari'       # gíup phân trang
+gem 'ransack'     # tạo form tìm kiếm
+#gem 'bootstrap-kaminari-views' #giao diện đẹp cho phân trang
 # gem 'to_xls-rails' #export excel
 gem 'paperclip', '~> 6.1' #image
 gem 'sassc-rails', '>= 2.1.0'
-
+gem 'font-awesome-sass'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
 gem 'turbolinks', '~> 5'

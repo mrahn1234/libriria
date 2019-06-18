@@ -1,22 +1,23 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= full_title(yield(:title)) %></title>
+    <title>Your Library</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+
+    
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1">
+  </head>
+  <%= render 'layouts/header' %>
   <body>
-    <%= render 'layouts/header' %>
-      <div class="container">
-         <% flash.each do |message_type, message| %>
-            <div style="margin-top: 20px", class="alert alert-<%= message_type %>"><%= message %></div>
-        <% end %>
-        <%= yield %>
-      </div>
+    <%= yield %>
   </body>
+  <%= render 'layouts/footer' %>
 </html>

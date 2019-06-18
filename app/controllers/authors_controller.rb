@@ -4,18 +4,18 @@ class AuthorsController < ApplicationController
 
 	def index
 		#@authors = Author.paginate(page: params[:page])
-		@q = Author.ransack(params[:q])
-    	@authors = @q.result.order("created_at DESC").page(params[:page])
+		@pagy, @authors = pagy(Author.all, items: 9)
     	#@full_authors = @q.result
     	# byebug
-    	respond_to do |format|
-	      format.html
-	      format.xls{send_data @authors.to_csv(col_sep: "\t")}
-    	end
+    	# respond_to do |format|
+	    #   format.html
+	    #   format.xls{send_data @authors.to_csv(col_sep: "\t")}
+    	# end
 	end
 
 	def show
 		@books = @author.books
+		@authors = Author.all
 	end
 
 	def new

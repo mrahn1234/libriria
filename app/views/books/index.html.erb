@@ -1,14 +1,53 @@
-<h1>All Books</h1> 
-<%= render "shared/search"%>
-<% if logged_in? && current_user.role ==1 && !current_user?(@user) %>
-	<h3 style="text-align: center;"><%= link_to "BOOK", new_book_path, class: "glyphicon glyphicon-plus"%></h3>
-	<span><%=render "excel" %></span>
-<% end %>
+<%= render "banner" %>
+<div id="content" class="site-content">
+        <div id="primary" class="content-area">
+            <main id="main" class="site-main">
+                <div class="books-media-list">
+                    <div class="container">
+                        <div class="row">
+                               <%= render "search" %>
+                        </div>
+                    </div> 
+                </div>
+            </main>
+            <div class="row">
+                <div class="col-md-9 col-md-push-3">    
+                    <div class="filter-options margin-list">
+                        <div class="row">                                            
+                            <div class="col-md-4 col-sm-4">
+                                
+                                   <%= select_tag :sort, options_for_select(@sort), id:"sort", remote: true%>
+                                   <%= button_tag "submit", id:"btn", remote: true, style:"margin-top: 10px;"%>
+                            </div>
+                            <div class="col-md-4 col-sm-4">
+                                <div class="filter-result">Showing items 1 to 9 of <%= Book.count%> total</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="pagination" style="float: right; margin-right: 150px"><%== pagy_bootstrap_nav(@pagy)%></div>
+                <div class="booksmedia-fullwidth">
+                    <div class="row">
+                        <div class="col-md-10 col-md-push-1">  
+                            <ul>              
+                                <%=render @books%>
+                            </ul>
+                        </div>
+                    </div>
 
-<%= will_paginate %>
+                </div>
+                <div class="pagination"  style="float: right; margin-right: 150px; margin-bottom: 40px;"><%==pagy_bootstrap_nav(@pagy)%></div>
+            </div>
+                        
+        </div>
+</div>
 
-<ul class="row">
-     <%= render @books %>     
-</ul> 
-<%= will_paginate %>
-
+<script type="text/javascript">
+    $('#btn').click(function(){
+        var selected = $('#sort option:selected');
+        if(selected.val() == "Name of Book")
+           <%= @books = Book.all.order(:name)%>
+    })
+</script>

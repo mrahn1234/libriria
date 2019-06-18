@@ -12,9 +12,16 @@
  *
  *= require_tree .
  *= require_self
-
+ *= require style.scss
+ *= require jquery.accordion.css
+ *= require font-awesome.min.scss
+ *= require mmenu.positioning.scss
+ *= require mmenu.scss
+ *= require responsivetable.scss
+ *= require slick.scss
+ *= require slick.css
+ *= require slick-theme.scss
+ *= require slick-theme
+ *= require custom
  */
- 
-@import "bootstrap";
-@import "bootstrap-sprockets";
 

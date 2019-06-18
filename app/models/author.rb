@@ -10,13 +10,7 @@ class Author < ApplicationRecord
 					 uniqueness: { case_sensitive: false }
 	
 
-	def self.to_csv(option ={})
-		CSV.generate(option) do |csv|
-			csv << column_names
-			all.each do |author|
-				csv << author.attributes.values_at(*column_names)
-			end
-		end
-	end
+	has_attached_file :author_img, styles: { author_index: "250x350>", author_show: "325x475>" }, default_url: "/assets/missing_author.png"
+  	validates_attachment_content_type :author_img, content_type: /\Aimage\/.*\z/
 	
 end
