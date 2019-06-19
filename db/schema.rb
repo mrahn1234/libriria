@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_14_151336) do
+ActiveRecord::Schema.define(version: 2019_06_19_135225) do
 
   create_table "authors", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -51,10 +51,30 @@ ActiveRecord::Schema.define(version: 2019_06_14_151336) do
     t.index ["author_id"], name: "index_books_on_author_id"
   end
 
+  create_table "carts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "verify", default: 3
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_carts_on_user_id"
+  end
+
   create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "requests", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "number"
+    t.datetime "datefrom"
+    t.datetime "dateto"
+    t.bigint "cart_id"
+    t.bigint "book_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_requests_on_book_id"
+    t.index ["cart_id"], name: "index_requests_on_cart_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -74,4 +94,7 @@ ActiveRecord::Schema.define(version: 2019_06_14_151336) do
   add_foreign_key "bookcategories", "books"
   add_foreign_key "bookcategories", "categories"
   add_foreign_key "books", "authors"
+  add_foreign_key "carts", "users"
+  add_foreign_key "requests", "books"
+  add_foreign_key "requests", "carts"
 end

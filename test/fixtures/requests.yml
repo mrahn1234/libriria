@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  day_from: 2019-03-30 00:59:33
-  day_to: 2019-03-30 00:59:33
-  verify: 
+  number: 1
+  datefrom: 2019-06-19 20:52:25
+  dateto: 2019-06-19 20:52:25
 
 two:
-  day_from: 2019-03-30 00:59:33
-  day_to: 2019-03-30 00:59:33
-  verify: 
+  number: 1
+  datefrom: 2019-06-19 20:52:25
+  dateto: 2019-06-19 20:52:25

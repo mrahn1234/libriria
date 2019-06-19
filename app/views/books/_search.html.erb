@@ -3,39 +3,23 @@
         <div class="container">
             <div class="filter-box">
                 <h3>What are you looking for at the library?</h3>
-                <form action="http://libraria.demo.presstigers.com/index.html" method="get">
-                    <div class="col-md-4 col-sm-6">
-                        <div class="form-group">
-                            <label class="sr-only" for="keywords">Search by Keyword</label>
-                            <input class="form-control" placeholder="Search by Keyword" id="keywords" name="keywords" type="text">
+                     <%= search_form_for @q do |f| %>
+                        <div class="col-md-9 col-sm-6">
+                            <div class="form-group">
+                                <%= f.text_field :name_cont, class: "form-control",placeholder: "Search by name of book" %>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="form-group">
-                            <select name="catalog" id="catalog" class="form-control">
-                                <option>SEARCH AUTHOR</option>
-                                <%= @authors.each do |a| %>
-                                    <option><%= a.name %></option>
-                                <% end %>
-                            </select>
+                        <!-- <div class="col-md-5 col-sm-6">
+                            <div class="form-group">
+                              
+                            
+                            </div>
+                        </div> -->
+
+                        <div class="col-md-3 col-sm-6">
+                            <%= f.submit "Search", class: "form-control"%>
                         </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="form-group">
-                            <select name="category" id="category" class="form-control">
-                                <option>SEARCH CATEGORIES</option>
-                                <%= @categories.each do |c| %>
-                                    <option><%= c.name %>(<%=c.books.count %>)</option>
-                                <% end %>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-2 col-sm-6">
-                        <div class="form-group">
-                            <input class="form-control" type="submit" value="Search">
-                        </div>
-                    </div>
-                </form>
+                    <% end %>  
             </div>
         </div>
 </section>

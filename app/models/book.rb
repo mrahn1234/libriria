@@ -15,9 +15,8 @@ class Book < ApplicationRecord
 	# has_many :follows, as: :target, dependent: :destroy
 	# has_many :followers, through: :follows, source: :user
 	# #ManytoMany _Request details
-	# has_many :request_details, dependent: :destroy
-	# #has_many :requests , dependent: :destroy
-	# has_many :users, through: :requests
+	has_many :requests, dependent: :destroy
+	has_many :users, through: :requests
 	#Validate
 	validates :name, presence: true, length: { maximum: 50 }
 	validates :quantity, presence: true, length: { maximum: 1000 }

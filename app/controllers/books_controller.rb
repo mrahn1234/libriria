@@ -4,7 +4,11 @@ class BooksController < ApplicationController
 	def index
     	@categories = Category.all
 		@authors = Author.all
-    	@pagy, @books = pagy_countless(Book.all.order("created_at DESC"), items: 9)
+		@q = Book.search(params[:q])
+  		@search = @q.result(distinct: true)
+
+
+    	@pagy, @books = pagy_countless(@search.order("created_at DESC"), items: 9)
     	# @books = Book.all.order("created_at DESC").page(params[:page]).per_page(9)
     	@sort = ["Default","Name of book", "Name of author"]
     	respond_to do |format|
@@ -18,6 +22,8 @@ class BooksController < ApplicationController
 
 	
 	def show
+		@q = Book.search(params[:q])
+  		@search = @q.result(distinct: true)
 		@categories = Category.all
 		@authors = Author.all
 		# @reviews = Review.where(book_id: @book_id).order("created_at DESC")	
