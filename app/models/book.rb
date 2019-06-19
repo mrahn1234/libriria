@@ -5,7 +5,7 @@ class Book < ApplicationRecord
 	has_many :bookcategories, dependent: :destroy
 	has_many :categories, through: :bookcategories	#, source: :category
 	accepts_nested_attributes_for :bookcategories, allow_destroy: true
-
+	paginates_per 9
  # 	#ManytoMany Book_Liked_User
  #   	has_many :likes, dependent: :destroy
  #   	has_many :liked_users, through: :likes, source: :user

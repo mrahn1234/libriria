@@ -2,13 +2,13 @@
     <div class="book-list-icon yellow-icon"></div>
     <figure>
         <a>
-            <%= link_to (image_tag book.book_img.url(:book_index), class: "book_index",style:"height: 450px; width: 355px"),book,method: :get%>
+
+            <%= link_to (image_tag ("books/"+book.book_img_file_name), class: "book_index",style:"height: 450px; width: 355px"),book,method: :get%>
         </a>
         <figcaption>
             <header>
                 <h4><%= link_to book.name, book,method: :get%></h4>
                 <p><strong>Author:</strong><%= book.author.name %></p>
-                <p><strong>Category:</strong>  <%=  book.categories[rand(0...book.categories.count)].name %></p>
             </header>
             <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. Pellentesque dolor turpis, pulvinar varius.</p>
             <div class="actions">

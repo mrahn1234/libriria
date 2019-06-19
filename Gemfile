@@ -16,7 +16,7 @@ gem 'will_paginate'
 gem 'will_paginate-bootstrap'
 gem 'bootstrap-sass', '~> 3.4', '>= 3.4.1'
 gem 'pagy' # thay the cho will_paginate va kaminari nhe hon
-#gem 'kaminari'       # gíup phân trang
+gem 'kaminari'       # gíup phân trang
 gem 'ransack'     # tạo form tìm kiếm
 #gem 'bootstrap-kaminari-views' #giao diện đẹp cho phân trang
 # gem 'to_xls-rails' #export excel

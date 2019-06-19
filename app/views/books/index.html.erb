@@ -14,13 +14,16 @@
                 <div class="col-md-9 col-md-push-3">    
                     <div class="filter-options margin-list">
                         <div class="row">                                            
-                            <div class="col-md-4 col-sm-4">
-                                
-                                   <%= select_tag :sort, options_for_select(@sort), id:"sort", remote: true%>
-                                   <%= button_tag "submit", id:"btn", remote: true, style:"margin-top: 10px;"%>
+                            <div class="col-md-4 col-sm-4", style="margin-top: 11px;">
+                                   <%= select_tag :sort, options_for_select(@sort), id:"list_sort", remote: true%>
+                                  
                             </div>
                             <div class="col-md-4 col-sm-4">
-                                <div class="filter-result">Showing items 1 to 9 of <%= Book.count%> total</div>
+                                <div class="filter-result" >
+                                    <%= button_tag "Sort", id:"btn_sort"%>
+                                    <span>Showing items 1 to 9 of <%= Book.count%> total</span>
+
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -31,7 +34,7 @@
                 <div class="booksmedia-fullwidth">
                     <div class="row">
                         <div class="col-md-10 col-md-push-1">  
-                            <ul>              
+                            <ul id="book-index">              
                                 <%=render @books%>
                             </ul>
                         </div>
@@ -45,9 +48,57 @@
 </div>
 
 <script type="text/javascript">
-    $('#btn').click(function(){
-        var selected = $('#sort option:selected');
-        if(selected.val() == "Name of Book")
-           <%= @books = Book.all.order(:name)%>
+    $('#btn_sort').click(function(){
+        link = window.location.href + ".json"
+        var selected = $('#list_sort').val()
+        $.ajax({
+          type: "GET",
+          url: link,
+          dataType: 'json',
+          success: function(res){
+            res.sort(function(a, b) {
+
+              if (selected == "Name of book")
+              {
+                var nameA = a.name.toUpperCase(); // bỏ qua hoa thường
+                var nameB = b.name.toUpperCase(); // bỏ qua hoa thường
+              }
+              else if (selected == "Name of Author")
+              {
+                var nameA = a.author.name.toUpperCase(); // bỏ qua hoa thường
+                var nameB = b.author.name.toUpperCase(); // bỏ qua hoa thường
+              }
+              else if (selected == "Default")
+              {
+                var nameA = a.created_at.name; // bỏ qua hoa thường
+                var nameB = b.created_at.name;
+              }
+              if (nameA < nameB) {
+                return -1;
+              }
+              if (nameA > nameB) {
+                return 1;
+              }
+
+              // name trùng nhau
+              return 0;
+            });
+            $.ajax({
+                type:"POST",
+                url: "/sort",
+                dataType: 'script',
+                data: {books: res},
+                success: function(response){
+                },
+                error:function(err){
+                    console.log(err)
+          }
+            })
+          },
+          error:function(error){
+            console.log(error)
+          }
+        });
     })
+    
 </script>

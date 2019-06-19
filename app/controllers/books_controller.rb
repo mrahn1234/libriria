@@ -5,19 +5,12 @@ class BooksController < ApplicationController
     	@categories = Category.all
 		@authors = Author.all
     	@pagy, @books = pagy_countless(Book.all.order("created_at DESC"), items: 9)
-    	@sort = ["Default","Name of Book", "Name of Author"]
-   
-    		if params[:sort] === "Name of Book"
-    			@pagy, @books = pagy_countless(Book.all.order(:sort), items: 9)
-    		elsif params[:sort] === "Name of Author"
-    			@pagy, @books = pagy_countless(Book.all.order(:sort), items: 9)
-    		else
-    			@pagy, @books = pagy_countless(Book.all.order("created_at DESC"), items: 9)
-    		end
-    		 @q = Book.ransack(params[:q])
+    	# @books = Book.all.order("created_at DESC").page(params[:page]).per_page(9)
+    	@sort = ["Default","Name of book", "Name of author"]
     	respond_to do |format|
 	      format.html
 	      format.js
+	      format.json {render json: @books}
 	      # format.xls{send_data @full_books.to_csv(col_sep: "\t")}
     	end
     	# byebug
@@ -35,7 +28,7 @@ class BooksController < ApplicationController
 		end
 		respond_to do |format|
 	      format.html
-	      format.js
+	      format.js 
 	      # format.xls{send_data @full_books.to_csv(col_sep: "\t")}
     	end
 	end
@@ -75,8 +68,25 @@ class BooksController < ApplicationController
 		flash[:success] = "Deleted book success"
 	end
 
-	def sortoption
-		@pagy, @books = pagy_countless(Book.all.order(:name), items: 9)
+	def sort
+		
+			if params[:books]
+				@books_request = convert params[:books].values
+				respond_to do |format|
+					format.html
+					format.js
+				end
+			end
+		
+	end
+
+	def convert arr
+		newArr = []
+		arr.each do |object|
+	  		newMyObject = Book.new(object)
+	  		newArr<<newMyObject
+		end
+		return newArr
 	end
 	# def followers
 	# @book = Book.find(params[:book_id])
