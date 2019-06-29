@@ -1,0 +1,12 @@
+ <li class="clearfix">
+    <% book = Book.find(@book.id)%>
+    <%= link_to (image_tag ("books/"+book.book_img_file_name), style:"height: 70px; width: 45px; margin-top: 30px"),book,method: :get%>
+    <div class="item-info">
+        <div class="name">
+            <a href="#">The Great Gatsby</a>
+        </div>
+        <div class="author"><strong>Author:</strong> F. Scott Fitzgerald</div>
+        <div class="price">1 X $10.00</div>
+    </div>
+    <a class="remove" href="#"><i class="fa fa-trash-o"></i></a>
+</li>

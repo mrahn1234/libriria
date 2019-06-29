@@ -29,7 +29,13 @@
                 </div>
             </div>
             <div class="row">
-                <div class="pagination" style="float: right; margin-right: 150px"><%== pagy_bootstrap_nav(@pagy)%></div>
+              <div>
+                <div class="pagination" style="margin-left: 155px;"><%== pagy_bootstrap_nav(@pagy)%></div>
+                <div style="float: right; margin-right: 150px;">
+                  <a href="/books/new"><i class="fas fa-plus fa-4x " style="color: orange;" ></i></a>
+                </div>
+              </div>
+                
                 <div class="booksmedia-fullwidth">
                     <div class="row">
                         <div class="col-md-10 col-md-push-1">  
@@ -40,7 +46,7 @@
                     </div>
 
                 </div>
-                <div class="pagination"  style="float: right; margin-right: 150px; margin-bottom: 40px;"><%==pagy_bootstrap_nav(@pagy)%></div>
+                <div class="pagination"  style="margin-left: 155px; margin-bottom: 40px;"><%==pagy_bootstrap_nav(@pagy)%></div>
             </div>
                         
         </div>
@@ -91,7 +97,7 @@
                 },
                 error:function(err){
                     console.log(err)
-          }
+                }
             })
           },
           error:function(error){
@@ -99,5 +105,8 @@
           }
         });
     })
-    
+// alertify
+//   .alert("This is an alert dialog.", function(){
+//     alertify.message('OK');
+//   });
 </script>

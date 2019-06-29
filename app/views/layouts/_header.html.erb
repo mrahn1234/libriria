@@ -31,60 +31,10 @@
                                                 <% if user_signed_in? %>
                                                     <a><i class="fa fa-lock"></i><%= link_to current_user.name  %> | <%= link_to "Sign out", destroy_user_session_path, method: :delete  %> </a> 
                                                 <% else %>
-                                                       <a><i class="fa fa-lock"></i><%= link_to "Login / Register", new_user_session_path,method: :get %></a>
+                                                       <a><i class="fa fa-lock"></i><%= link_to "Login /", new_user_session_path,method: :get %><%= link_to " Register", new_user_registration_path, method: :get%></a>
                                                 <% end %>
                                                 <span>|</span>
-                                                <div class="header-cart dropdown">
-                                                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                                                        <i class="fa fa-shopping-cart"></i>
-                                                        <small>0</small>
-                                                    </a>
-                                                    <div class="dropdown-menu cart-dropdown">
-                                                        <% if user_signed_in? %> 
-                                                            <ul>
-                                                                <li class="clearfix">
-                                                                    <img src="/assets/header-cart-image-01.jpg" alt="cart item" />
-                                                                    <div class="item-info">
-                                                                        <div class="name">
-                                                                            <a href="#">The Great Gatsby</a>
-                                                                        </div>
-                                                                        <div class="author"><strong>Author:</strong> F. Scott Fitzgerald</div>
-                                                                        <div class="price">1 X $10.00</div>
-                                                                    </div>
-                                                                    <a class="remove" href="#"><i class="fa fa-trash-o"></i></a>
-                                                                </li>
-                                                                <li class="clearfix">
-                                                                    <img src="/assets/header-cart-image-02.jpg" alt="cart item" />
-                                                                    <div class="item-info">
-                                                                        <div class="name">
-                                                                            <a href="#">The Great Gatsby</a>
-                                                                        </div>
-                                                                        <div class="author"><strong>Author:</strong> F. Scott Fitzgerald</div>
-                                                                        <div class="price">1 X $10.00</div>
-                                                                    </div>
-                                                                    <a class="remove" href="#"><i class="fa fa-trash-o"></i></a>
-                                                                </li>
-                                                                <li class="clearfix">
-                                                                    <img src="/assets/header-cart-image-03.jpg" alt="cart item" />
-                                                                    <div class="item-info">
-                                                                        <div class="name">
-                                                                            <a href="#">The Great Gatsby</a>
-                                                                        </div>
-                                                                        <div class="author"><strong>Author:</strong> F. Scott Fitzgerald</div>
-                                                                        <div class="price">1 X $10.00</div>
-                                                                    </div>
-                                                                    <a class="remove" href="#"><i class="fa fa-trash-o"></i></a>
-                                                                </li>
-                                                            </ul>
-                                                            <div class="cart-buttons">
-                                                                <a href="/carts" class="btn btn-dark-gray">View Cart</a>
-                                                            </div>
-                                                        <% else %>
-                                                            <li style="margin-top: 17px;"><%= link_to "Please login",new_user_session_path,method: :get %> </li>
-                                                        <% end %>
-                                                        
-                                                    </div>
-                                                </div>
+                                                <%= render "/layouts/cart" %>
                                             </div>
                                         </div>
                                     </div>
@@ -122,6 +72,7 @@
                                             </li> -->
                                         <li><a href="services.html">Services</a></li>
                                         <li><a href="contact.html">Contact</a></li>
+                                        <li> <a><%= link_to "History of Cart", carts_path(current_user), method: :get %></a></li>
                                     </ul>
                                 </div>
                             </div>

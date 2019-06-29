@@ -8057,6 +8057,7 @@ textarea::-webkit-input-placeholder {
   -moz-border-radius: 0;
   border-radius: 0;
   padding: 15px 10px;
+  margin-block-start: 10px;
 }
 .select-styled::after {
   content: '\f107';

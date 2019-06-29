@@ -1,13 +1,17 @@
 class BooksController < ApplicationController
-	before_action :find_book, only: [:show, :edit, :update, :destroy, :categories_book]
+
+	before_action :find_book, only: [:show, :edit, :update, :destroy]
+	before_action :find_user, only:[:show]
 	helper_method :sort_direction
+
+
 	def index
     	@categories = Category.all
 		@authors = Author.all
 		@q = Book.search(params[:q])
   		@search = @q.result(distinct: true)
 
-
+  		
     	@pagy, @books = pagy_countless(@search.order("created_at DESC"), items: 9)
     	# @books = Book.all.order("created_at DESC").page(params[:page]).per_page(9)
     	@sort = ["Default","Name of book", "Name of author"]
@@ -26,12 +30,7 @@ class BooksController < ApplicationController
   		@search = @q.result(distinct: true)
 		@categories = Category.all
 		@authors = Author.all
-		# @reviews = Review.where(book_id: @book_id).order("created_at DESC")	
-		if @reviews.blank?
-			@book.point = 0
-		else
-			@book.point = @book.reviews.average(:rating).round(2)
-		end
+
 		respond_to do |format|
 	      format.html
 	      format.js 
@@ -57,6 +56,7 @@ class BooksController < ApplicationController
 	end
 
 	def create
+		# byebug
 		@book= Book.new(book_params)
 		if @book.save
 			flash[:success] = "Creating book success"
@@ -121,6 +121,8 @@ class BooksController < ApplicationController
 		@book = Book.find(params[:id])
 	end
 
-	
+	def find_user
+		@user = current_user
+	end
 
 end

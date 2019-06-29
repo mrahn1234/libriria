@@ -1,194 +1,31 @@
 <%= render "banner" %>
+      <!-- # 3: carting, 0:pending, 1: accept, 2: decline -->
+<% if @carts %>
+	<div class="table-users" style="margin-top: 70px;">
+	   <div class="header">History of Trading</div>
+	   
+	   <table cellspacing="0">
+	      <tr>
+	         <th>User</th>
+	         <th>Email</th>
+	         <th>Status</th>
+	         <th>Date</th>
+	         <th style="width: 10px;">Option</th>
+	      </tr>
 
-<div id="content" class="site-content">
-    <div id="primary" class="content-area">
-        <main id="main" class="site-main">
-            <div class="cart-main">
-                <div class="container">
-                    <div class="row">
-                        <div class="cart-head">
-                            <div class="col-xs-12 col-sm-6 account-option">
-                                <strong><%= current_user.name%></strong>
-                                <ul>
-                                    <li><a href="#">Edit Account</a></li>
-                                </ul>
-                            </div>
-                            <div class="col-xs-12 col-sm-6 library-info">
-                                <ul>
-                                    <li>
-                                        <strong>Home Library:</strong>
-                                        Stephen A. Schwarzman Building
-                                    </li>
-                                    <li>
-                                        <strong>Email:</strong>
-                                        <a><%=current_user.email%></a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="page type-page status-publish hentry">
-                                <div class="entry-content">
-                                    <div class="woocommerce table-tabs r-tabs" id="responsiveTabs">
-                                        <div class="tab-content">
-                                            <div class="r-tabs-accordion-title r-tabs-state-active"><a href="#sectionA" class="r-tabs-anchor">Book Bag</a></div><div id="sectionA" class="tab-pane fade r-tabs-panel r-tabs-state-active active in" style="display: block;">
-                                                <form method="post" action="cart-page.html">
-                                                    <table class="table table-bordered shop_table cart">
-                                                        <thead>
-                                                            <tr>
-                                                                <th class="product-name">&nbsp;</th>
-                                                                <th class="product-name">Title</th>
-                                                                <th class="product-quantity">Action</th>
-                                                                <th class="product-price">Pickup Location </th>                                                                
-                                                                <th class="product-subtotal">&nbsp;</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr class="cart_item">
-                                                                <td data-title="cbox" class="product-cbox" data-th="&nbsp;"><span class="bt-content">
-                                                                    <span>
-                                                                        <input type="checkbox" id="cbox3" value="first_checkbox">
-                                                                    </span>
-                                                                </span></td>
-                                                                <td data-title="Product" class="product-name" data-th="Title"><span class="bt-content">
-                                                                    <span class="product-thumbnail">
-                                                                        <a href="#"><img src="assets/cart/cart-product-1.jpg" alt="cart-product-1"></a>
-                                                                    </span>
-                                                                    <span class="product-detail">
-                                                                        <a href="#"><strong>The Great Gatsby</strong></a>
-                                                                        <span><strong>Author:</strong> F. Scott Fitzgerald</span>
-                                                                        <span><strong>ISBN:</strong> 9781581573268</span>
-                                                                        <span><strong>Fees:</strong> <em>$10</em></span>
-                                                                    </span>
-                                                                </span></td>
-                                                                <td data-title="action" class="product-action" data-th="Action"><span class="bt-content">
-                                                                    <div class="dropdown">
-                                                                        <a href="#" data-toggle="dropdown" class="dropdown-toggle">Edit Hold <b class="caret"></b></a>
-                                                                        <ul class="dropdown-menu" style="">
-                                                                            <li><a href="#">Edit Hold</a></li>
-                                                                            <li><a href="#">Cancel Hold</a></li>
-                                                                            <li><a href="#">Add Another Hold</a></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                    <div class="addition-action">
-                                                                        <small>Additional Actions:</small>
-                                                                        <ul>
-                                                                            <li><a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a></li>
-                                                                            <li><a href="#"><i class="fa fa-heart" aria-hidden="true"></i></a></li>
-                                                                            <li><a href="#"><i class="fa fa-envelope" aria-hidden="true"></i></a></li>
-                                                                            <li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
-                                                                            <li><a href="#"><i class="fa fa-print" aria-hidden="true"></i></a></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </span></td>
-                                                                <td data-title="Price" class="product-price" data-th="Pickup Location "><span class="bt-content">
-                                                                    <p><a href="#">Available </a> at 53rd Street Fiction (CLASSICS FIC MORRISON) plus 4 more <a href="#"> see all </a></p>
-                                                                </span></td>
-                                                                <td class="product-remove" data-th="&nbsp;"><span class="bt-content">
-                                                                    You've placed this item on hold. This item is in your book bag <a href="#">remove</a>
-                                                                </span></td>
-                                                            </tr>
-                                                            <tr class="cart_item">
-                                                                <td data-th="&nbsp;"><span class="bt-content">
-                                                                    <span data-title="cbox" class="product-cbox">
-                                                                        <input type="checkbox" id="cbox1" value="first_checkbox">
-                                                                    </span>
-                                                                </span></td>
-                                                                <td data-title="Product" class="product-name" data-th="Title"><span class="bt-content">
-                                                                    <span class="product-thumbnail">
-                                                                        <a href="#"><img src="assets/cart/cart-product-2.jpg" alt="cart-product-2"></a>
-                                                                    </span>
-                                                                    <span class="product-detail">
-                                                                        <a href="#"><strong>The Great Gatsby</strong></a>
-                                                                        <span><strong>Author:</strong> F. Scott Fitzgerald</span>
-                                                                        <span><strong>ISBN:</strong> 9781581573268</span>
-                                                                        <span><strong>Fees:</strong> <em>$10</em></span>
-                                                                    </span>
-                                                                </span></td>
-                                                                <td data-title="action" class="product-action" data-th="Action"><span class="bt-content">
-                                                                    <div class="dropdown">
-                                                                        <a href="#" data-toggle="dropdown" class="dropdown-toggle">Edit Hold <b class="caret"></b></a>
-                                                                        <ul class="dropdown-menu">
-                                                                            <li><a href="#">Edit Hold</a></li>
-                                                                            <li><a href="#">Cancel Hold</a></li>
-                                                                            <li><a href="#">Add Another Hold</a></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                    <div class="addition-action">
-                                                                        <small>Additional Actions:</small>
-                                                                        <ul>
-                                                                            <li><a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a></li>
-                                                                            <li><a href="#"><i class="fa fa-heart" aria-hidden="true"></i></a></li>
-                                                                            <li><a href="#"><i class="fa fa-envelope" aria-hidden="true"></i></a></li>
-                                                                            <li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
-                                                                            <li><a href="#"><i class="fa fa-print" aria-hidden="true"></i></a></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </span></td>
-                                                                <td data-title="Price" class="product-price" data-th="Pickup Location "><span class="bt-content">
-                                                                    <p><a href="#">Available </a> at 53rd Street Fiction (CLASSICS FIC MORRISON) plus 4 more <a href="#"> see all </a></p>
-                                                                </span></td>
-                                                                <td class="product-remove" data-th="&nbsp;"><span class="bt-content">
-                                                                    You've placed this item on hold. This item is in your book bag <a href="#">remove</a>
-                                                                </span></td>
-                                                            </tr>
-                                                            <tr class="cart_item">
-                                                                <td data-th="&nbsp;"><span class="bt-content">
-                                                                    <span data-title="cbox" class="product-cbox">
-                                                                        <input type="checkbox" id="cbox2" value="first_checkbox">
-                                                                    </span>
-                                                                </span></td>
-                                                                <td data-title="Product" class="product-name" data-th="Title"><span class="bt-content">
-                                                                    <span class="product-thumbnail">
-                                                                        <a href="#"><img src="assets/cart/cart-product-3.jpg" alt="cart-product-3"></a>
-                                                                    </span>
-                                                                    <span class="product-detail">
-                                                                        <a href="#"><strong>The Great Gatsby</strong></a>
-                                                                        <span><strong>Author:</strong> F. Scott Fitzgerald</span>
-                                                                        <span><strong>ISBN:</strong> 9781581573268</span>
-                                                                        <span><strong>Fees:</strong> <em>$10</em></span>
-                                                                    </span>
-                                                                </span></td>
-                                                                <td data-title="action" class="product-action" data-th="Action"><span class="bt-content">
-                                                                    <div class="dropdown">
-                                                                        <a href="#" data-toggle="dropdown" class="dropdown-toggle">Edit Hold <b class="caret"></b></a>
-                                                                        <ul class="dropdown-menu">
-                                                                            <li><a href="#">Edit Hold</a></li>
-                                                                            <li><a href="#">Cancel Hold</a></li>
-                                                                            <li><a href="#">Add Another Hold</a></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                    <div class="addition-action">
-                                                                        <small>Additional Actions:</small>
-                                                                        <ul>
-                                                                            <li><a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a></li>
-                                                                            <li><a href="#"><i class="fa fa-heart" aria-hidden="true"></i></a></li>
-                                                                            <li><a href="#"><i class="fa fa-envelope" aria-hidden="true"></i></a></li>
-                                                                            <li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
-                                                                            <li><a href="#"><i class="fa fa-print" aria-hidden="true"></i></a></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </span></td>
-                                                                <td data-title="Price" class="product-price" data-th="Pickup Location "><span class="bt-content">
-                                                                    <p><a href="#">Available </a> at 53rd Street Fiction (CLASSICS FIC MORRISON) plus 4 more <a href="#"> see all </a></p>
-                                                                </span></td>
-                                                                <td class="product-remove" data-th="&nbsp;"><span class="bt-content">
-                                                                    You've placed this item on hold. This item is in your book bag <a href="#">remove</a>
-                                                                </span></td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div><!-- .entry-content -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </main>
-    </div>
-</div>
+	      <% @carts.each do |c| %>
+	      	<%= render partial: "carts/cart", object: c, as: :c %>
+	      <% end %>
+	      
+	   </table>
+	</div>
+<% else %>
+	<h1 style="text-align: center; margin-top: 100px;">
+		Your cart is emptying <i class="far fa-frown"></i>
+	</h1>
+	<%= link_to books_url  do %>
+  		<h3 style="text-align: center; ">
+		 	<i class= "fas fa-arrow-right"></i>Go to Book & Media
+		</h3>
+	<% end %>
+<% end %>

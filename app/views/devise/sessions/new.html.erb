@@ -26,17 +26,18 @@
                     <div class="woocommerce">
                         <div class="woocommerce-login">
                             <div class="company-info signin-register">
-                                <div class="col-md-5 col-md-offset-1 border-dark-left">
+                                <div class="col-md-6 col-md-offset-3">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <div class="company-detail bg-dark margin-left">
+                                            <div class="company-detail bg-dark margin-center">
                                                 <div class="signin-head">
-                                                    <h2>Sign in</h2>
-                                                    <span class="underline left"></span>
+                                                    <h2 style="text-align: center;" >Sign in</h2>
+                                                    <span class="underline center"></span>
                                                 </div>
                                                 <form class="login" method="post">
                                                     <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
                                                         <div class="form-inputs">
+                                                          <%= f.error_notification %>
                                                           <%= f.input :email,
                                                                       required: false,
                                                                       autofocus: true,
@@ -47,45 +48,10 @@
                                                           <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
                                                         </div>
                                                         <div class="form-actions">
-                                                          <%= f.button :submit, "Log in" %>
+                                                          <%= f.button :submit, "Log in", data: {disable_with: "Signing in..."} %>
                                                         </div>
                                                     <% end %>
                                                 </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-5 border-dark new-user">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="company-detail new-account bg-light margin-right">
-                                                <div class="new-user-head">
-                                                    <h2>Sign up</h2>
-                                                  </div>
-                                                  <form>
-                                                      <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-                                                        <%= f.error_notification %>
-
-                                                        <div class="form-inputs">
-                                                          <%= f.input :name,placeholder:"Your Name" %>
-                                                          <%= f.input :email,
-                                                                      required: true,
-                                                                      autofocus: true,
-                                                                      input_html: { autocomplete: "email",placeholder:"Your Email" }%>
-                                                          <%= f.input :password,
-                                                                      required: true,
-                                                                      hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
-                                                                      input_html: { autocomplete: "new-password",placeholder:"Password" } %>
-                                                          <%= f.input :password_confirmation,
-                                                                      required: true,
-                                                                      input_html: { autocomplete: "new-password",placeholder:"Password confirmation"  } %>
-                                                        </div>
-
-                                                        <div class="form-actions">
-                                                          <%= f.button :submit, "Sign up" %>
-                                                        </div>
-                                                      <% end %>
-                                                </form> 
                                             </div>
                                         </div>
                                     </div>

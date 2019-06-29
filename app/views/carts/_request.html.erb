@@ -1,0 +1,11 @@
+<%= form_for r do |f| %>
+	<tr>
+		<% book = Book.find(r.book_id) %>
+		<td><%= link_to (image_tag ("books/"+book.book_img_file_name),style:"height: 120px; width: 70px"),book,method: :get%></td>
+		<td><%= f.label :quantity ,value: book.quantity, readonly: true%></td>
+		<td><%= f.number_field :quantity_get, value: 1 ,max: book.quantity,min: 1%></td>
+		<td><%= f.date_field :datefrom, min: Date.today, value: Date.today, readonly: true%>
+		<td><%= f.date_field :dateto, min: Date.today, value: Date.today+1%></td>		
+		<td style="text-align: center"><i class="fa fa-trash"></i></td>
+	</tr>
+<% end %>

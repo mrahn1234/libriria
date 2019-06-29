@@ -1,33 +1,58 @@
 class RequestsController < ApplicationController
+
+	# before_action :find_book, only: [:new, :create]
+	before_action :find_user, only: [:new, :create]
+	before_action :find_book, only: [:new, :create]
+	before_action :find_request, only: [:destroy]
 	def new
-		
+		@request = Request.new
 	end
 
 	def create
-		@request= RequestDetail.new(request_detail_params)
-		@request.datefrom = Time.zone.now.to_date
+		# @request= Request.new(request_detail_params)
+		@request= Request.new
 
 		if @user.carts.last && @user.carts.last.verify == 3
 			@request.cart_id = @user.carts.last.id
 		else
 			@request.cart_id = (@user.carts.create).id
 		end
-
-		if @cart.save
-			redirect_to books_url
-			flash[:success] = "Added to cart"
+		@request.book_id = @book.id
+		if @request.save
+			# redirect_to books_url
+			# flash[:success] = "Added to cart"
+			respond_to do |format|
+			    format.html
+		    	format.js
+		    	format.json{render json: @request}
+		    end
+		    # get_rq_json
 		else
-			render "new"
+			# respond_to do |format|
+			#     format.html
+		 #    	format.js
+		 #    end
 		end
 
 	end
 
 	def destroy
 		# if current_user.role == 2 
-		# 	redirect_to carts_url if @request.destroy
-		# else
-		# 	redirect_to cart_request_path(@request) if @request_detail.destroy
-		# end
+		# byebug
+		if @request.destroy
+			redirect_to books_url
+		else
+		 	# redirect_to cart_request_path(@request) if @request_detail.destroy
+		end
+		# 
+	end
+
+	# get object append vao cart
+	def get_rq_json
+		request = Request.last
+		respond_to do |format|
+		    	format.json{render json: request}
+		end
 	end
 	
 	private
@@ -41,5 +66,9 @@ class RequestsController < ApplicationController
 
 		def find_cart
 			@cart = Cart.find(@request.cart.id)
+		end
+
+		def find_request
+			@request = Request.find(params[:id])
 		end
 end

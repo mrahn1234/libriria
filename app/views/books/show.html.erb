@@ -57,7 +57,7 @@
                                     </ul>
                                 </div>
                                 <header class="entry-header">
-                                    <h2 class="entry-title">The Great Gatsby</h2>
+                                    <h2 class="entry-title"><%= @book.name %></h2>
                                     <ul>
                                         <li><strong>Author:</strong> <%= link_to @book.author.name, @book.author,method: :get, class: "book-author"%></li>
                                         <li><strong>ISBN:</strong> 9781581573268</li>
@@ -66,8 +66,14 @@
                                     </ul>
                                 </header>
                                 <div class="entry-content post-buttons">
-                                    <a href="#." class="btn btn-dark-gray">Place a Hold</a>
-                                    <a href="#." class="btn btn-dark-gray">Add to Cart</a>
+                                    <%= link_to requests_path(book_id: @book.id),
+                                    {
+                                        class: "add-to-cart btn btn-dark-gray",
+                                        method: :post, 
+                                        remote: true
+                                    } do%>
+                                        <i class="fas fa-shopping-cart"></i> Add to Cart
+                                    <% end %>
                                 </div>
                             </div>
                         </div>
@@ -122,11 +128,29 @@
 
 <style type="text/css">
     a.book-author{
-       color: #ff7236;
-      
-}
-a.book-author:hover
+       color: #ff7236;     
+    }
+    a.book-author:hover
        {
         color: gray;
-       }
+    }
 </style>
+<script type="text/javascript">
+$('.add-to-cart').click(function(){
+    alertify
+  .alert("Added to cart").setHeader('<em>Thong bao</em>');
+    if($('.carts-append li').text() == "Emptying")
+    {    
+        $('.carts-append').html("<%= j render partial: "requests/item", object: @book, as: :book %>")
+        $('.carts-append').append("<%= j render partial: "layouts/view_cart_btn" %>")
+    }
+    else
+    {   
+        $('.cart-buttons').remove();
+        $('.carts-append').append("<%= j render partial: "requests/item", object: @book, as: :book %>")
+        $('.carts-append').append("<%= j render partial: "layouts/view_cart_btn" %>")
+    }
+  //
+})
+  
+</script>

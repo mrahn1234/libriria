@@ -1,0 +1,41 @@
+<%= render "banner" %>
+
+<!-- Material form login -->
+<div class="add-book">
+	<h1>
+		Form Add Book
+	</h1>
+	<div class="row">                                            
+        <div class="col-md-8 col-sm-6", style="margin-top: 11px;">
+               <%= form_for @book do |f| %>
+	 	
+		<%= f.text_field :name, placeholder: "Name", class: "form-control" %>
+		<%= f.collection_select :author_id, Author.all, :id, :name, prompt: "Select author",class: "form-control"%>
+		
+		<%= f.collection_select :category_ids, Category.all, :id, :name, prompt: "Select category",class: "form-control cc"%>
+		<% end %>
+              
+        </div>
+        
+	</div>	
+</div>
+      
+    
+<style type="text/css">
+	.add-book{
+		width: 50%;
+		margin: auto;
+		background-color: orange;
+		margin-top: 100px;
+	}
+	.form-control{
+		margin: auto;
+		margin-top: 10px  !important;
+		margin-bottom: 10px;
+		margin-block-start: 10px !important;
+		margin: 0 100px 0 100px !important;
+	}
+	.cc{
+		width: 3%
+	}
+</style>

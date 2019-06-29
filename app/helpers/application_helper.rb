@@ -9,7 +9,34 @@ module ApplicationHelper
       page_title + " | " + base_title
     end
   end
-  # def paginate(collection, params= {})
-  #   will_paginate collection, params.merge(:renderer => RemoteLinkPaginationHelper::LinkRenderer)
-  # end
+
+  def cart
+      @cart = Cart.where(user_id: current_user.id).last if current_user
+      if @cart 
+        return @cart
+      else 
+        return nil
+      end
+  end
+
+  def requests 
+    @cart = cart
+    if  @cart.nil? || @cart.verify != 3
+      return nil 
+    else
+      @requests = Request.where(cart_id: @cart.id)
+      return @requests
+    end
+  end
+
+  def check_status (cart)
+      if cart.verify == 0 
+        return "pending"
+      elsif cart.verify == 1 
+        return "accept"
+      elsif cart.verify == 2
+        return "decline"
+      end
+  end
+  
 end

@@ -1,0 +1,12 @@
+
+<% if  cart  %>
+	<div class="cart-buttons">
+    	<%= link_to "View Cart", cart_path(cart.id) ,class: "btn btn-dark-gray" %>
+	</div>
+<% else %>
+	<div class="cart-buttons">
+    	<%= link_to "View Cart" ,class: "btn btn-dark-gray" %>
+	</div>
+<% end %>
+
+
