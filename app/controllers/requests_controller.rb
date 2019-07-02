@@ -37,14 +37,11 @@ class RequestsController < ApplicationController
 	end
 
 	def destroy
-		# if current_user.role == 2 
-		# byebug
 		if @request.destroy
-			redirect_to books_url
+			redirect_to my_cart_cart_path
 		else
-		 	# redirect_to cart_request_path(@request) if @request_detail.destroy
+		 	redirect_to my_cart_cart_path
 		end
-		# 
 	end
 
 	# get object append vao cart

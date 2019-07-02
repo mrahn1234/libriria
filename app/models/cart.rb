@@ -8,7 +8,7 @@ class Cart < ApplicationRecord
 		
 	has_many :books, through: :request, source: :book
 
-	scope :carts_admin, -> {where verify: !3} 
+	scope :carts_admin, -> {where "verify not like '3'"} 
 
 	# scope :carts_user, -> {where user_id: current_user.id, verify: !3}
 

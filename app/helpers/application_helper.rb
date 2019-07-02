@@ -31,11 +31,11 @@ module ApplicationHelper
 
   def check_status (cart)
       if cart.verify == 0 
-        return "pending"
+        return "Pending"
       elsif cart.verify == 1 
-        return "accept"
+        return "Accept"
       elsif cart.verify == 2
-        return "decline"
+        return "Decline"
       end
   end
   

@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
 	root 'static_pages#index'
 	devise_for :users
+	# devise_for :users, controllers: { registrations: "registrations" }
 	resources :books
 	resources :authors
 	post '/sort', to: "books#sort"
@@ -10,8 +11,11 @@ Rails.application.routes.draw do
 	resources :carts do
 		member do
 			get "confirm"
+			post "confirm"
 			get "accept"
 			get "decline"
+			get "my_cart"
+			get "detail"
 		end
 	end
 	resources :requests 

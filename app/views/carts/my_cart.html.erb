@@ -1,20 +1,19 @@
 <%= render "banner" %>
       <!-- # 3: carting, 0:pending, 1: accept, 2: decline -->
-<% if @carts %>
+<% if user_signed_in? && @carts %>
 	<div class="table-users" style="margin-top: 70px;">
 	   <div class="header">History of Trading</div>
-	   
 	   <table cellspacing="0">
 	      <tr>
 	         <th>User</th>
 	         <th>Email</th>
 	         <th>Date</th>
-	         <th>Accept/Decline</th>
+	         <th>Status</th>
 	         <th>Option</th>
 	      </tr>
 
 	      <% @carts.each do |c| %>
-	      	<%= render partial: "carts/cart", object: c, as: :c %>
+	      	<%= render partial: "carts/my_cart", object: c, as: :c %>
 	      <% end %>
 	      
 	   </table>

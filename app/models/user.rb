@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  	after_create :create_cart
   	 devise :database_authenticatable, :registerable,
           :rememberable
           validates_uniqueness_of :email, case_sensitive: false
@@ -14,6 +15,16 @@ class User < ApplicationRecord
 	# #OneToMany Request pending shopee..
 	has_many :carts, dependent: :destroy
 	has_many :books, through: :cart
+
+
+
+	def create_cart
+		if self.save
+			return self.carts.create
+		end
+	end
+
+
 	# #ManytoMany User_follow
 	# has_many :active_relationships, class_name: "Relationship",
 	# 								foreign_key: "follower_id",
