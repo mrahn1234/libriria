@@ -7,14 +7,16 @@ Rails.application.routes.draw do
 	resources :authors
 	post '/sort', to: "books#sort"
 	get '/get_rq_json', to: "requests#get_rq_json"
-	post '/get_request_params', to: "carts#get_request_params"
+	# post '/confirm', to: "carts#confirm"
+	# get '/get_request_params', to: "carts#get_request_params"
+	get "/my_cart/:id", to: "carts#my_cart"
 	resources :carts do
 		member do
-			get "confirm"
+			# get "confirm"
 			post "confirm"
 			get "accept"
 			get "decline"
-			get "my_cart"
+			
 			get "detail"
 		end
 	end

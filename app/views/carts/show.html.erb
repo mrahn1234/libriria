@@ -1,6 +1,6 @@
 <%= render "banner" %>
-
-<% if @requests %>
+<%= render partial:"shared/notice"%>
+<% if @cart.verify == 3 %>
   <div class="table-users">
     <div class="header">Carts</div>
       <table cellspacing="0">
@@ -18,7 +18,7 @@
       </table>
   </div>
     <div style="float:right; margin-right: 19%">
-      <%= link_to "Borrow", confirm_cart_path, id: "borrow"%>
+      <%= link_to "Borrow", confirm_cart_path(@cart.id), method: :post, id: "borrow"%>
     </div>
 <% else %>
   <h1 style="text-align: center; margin-top: 100px;">
@@ -31,21 +31,24 @@
 <script type="text/javascript">
  
  link = window.location.href
- // var v = $("#request_number").text();
- // $('#cc').click(function(){
- //  console.log(v)
- // })
+  
+  // $('#request_number').change(function(e){
+  //   if($(this).val() > 100)
+  //   {
+  //     e.preventDefault();
+  //   }
+  // })
+
   var dateto = Array.from(document.querySelectorAll("#request_dateto"));
   var quantity = Array.from(document.querySelectorAll("#request_number"))
   var arr1 = dateto.map(d=>d.value)
   var  arr2 = quantity.map(d=>d.value)
   console.log(quantity)
-  $(document).on('change','#request_number, #request_dateto', function(){
+  $(document).on('click keyup','#request_number, #request_dateto', function(){
     quantity = Array.from(document.querySelectorAll("#request_number"))
     dateto = Array.from(document.querySelectorAll("#request_dateto"))
     arr2 = quantity.map(d=>d.value)
     arr1 = dateto.map(d=>d.value)
-    // console.log(arr2)
     // console.log(arr1)
   })
   // $(document).on('click','#request_dateto', function(){
@@ -57,14 +60,13 @@
  // var dateto = Array.from(document.querySelectorAll("#request_dateto"));
  // var quantity = Array.from(document.querySelectorAll("#request_quantity_get"));
 
-  
-
    // console.log(arr2)
    $('#borrow').click(function(){
+      // console.log(arr2)
        $.ajax({
           type: "POST",
-          url: "/get_request_params",
-          data: {dateto: arr1, number: arr2},
+          url: "/carts/"+"<%=@cart.id%>"+"/confirm",
+          data: {"dateto": arr1, "number": arr2},
           dataType: "json",
           success: function(res)
           {

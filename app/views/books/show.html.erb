@@ -63,7 +63,7 @@
                                         <li><strong>ISBN:</strong> 9781581573268</li>
                                         <li><strong>Edition:</strong> First edition</li>
                                         <li><strong>Publisher:</strong> <%= @book.publisher%></li>
-                                        <li><strong>Quantity:</strong> <%= @book.quantity%></li>
+                                        <li><strong>Quantity:</strong> <%= get_quantity(@book.id)%></li>
                                     </ul>
                                 </header>
                                 <div class="entry-content post-buttons">
@@ -138,20 +138,31 @@
 </style>
 <script type="text/javascript">
 $('.add-to-cart').click(function(){
-    alertify
-  .alert("Added to cart").setHeader('<em>Thong bao</em>');
-    if($('.carts-append li').text() == "Emptying")
-    {    
-        $('.carts-append').html("<%= j render partial: "requests/item", object: @book, as: :book %>")
-        $('.carts-append').append("<%= j render partial: "layouts/view_cart_btn" %>")
+    var check_quantity ="<%= get_quantity(@book.id) %>"
+    if (check_quantity == "0")
+    {
+        alertify
+        .alert("Sold out").setHeader('<em>Thong bao</em>');
     }
     else
     {   
-        $('.cart-buttons').remove();
-        $('.carts-append').append("<%= j render partial: "requests/item", object: @book, as: :book %>")
-        $('.carts-append').append("<%= j render partial: "layouts/view_cart_btn" %>")
+       
+        alertify
+        .alert("Added to cart").setHeader('<em>Thong bao</em>');
+        if($('.carts-append li').text() == "Emptying")
+        {    
+            $('.carts-append').html("<%= j render partial: "requests/item", object: @book, as: :book %>")
+            $('.carts-append').append("<%= j render partial: "layouts/view_cart_btn" %>")
+        }
+        else
+        {   
+            $('.cart-buttons').remove();
+            $('.carts-append').append("<%= j render partial: "requests/item", object: @book, as: :book %>")
+            $('.carts-append').append("<%= j render partial: "layouts/view_cart_btn" %>")
+        }
     }
-  //
+   
+  
 })
   
 </script>

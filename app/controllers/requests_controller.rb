@@ -16,8 +16,13 @@ class RequestsController < ApplicationController
 			@request.cart_id = @user.carts.last.id
 		else
 			@request.cart_id = (@user.carts.create).id
+			# respond_to do |format|
+		 #    	format.js{render action: "append"}
+		 #    end
 		end
-		@request.book_id = @book.id
+
+		@request.book_id = @book.id if @book.quantity > 0
+
 		if @request.save
 			# redirect_to books_url
 			# flash[:success] = "Added to cart"

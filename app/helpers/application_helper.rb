@@ -11,7 +11,7 @@ module ApplicationHelper
   end
 
   def cart
-      @cart = Cart.where(user_id: current_user.id).last if current_user
+      @cart = Cart.where(user_id: current_user.id).last if current_user 
       if @cart 
         return @cart
       else 

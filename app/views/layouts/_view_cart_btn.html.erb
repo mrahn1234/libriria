@@ -1,6 +1,14 @@
-
-	<div class="cart-buttons">
-    	<%= link_to "View Cart", cart_path(cart.id) ,class: "btn btn-dark-gray" %>
-	</div>
+<% if user_signed_in?%>
+	<% if cart.verify == 3%>
+		<div class="cart-buttons">
+	    	<%= link_to "View Cart", cart_path(cart.id) ,class: "btn btn-dark-gray" %>
+		</div>
+	<% else %>
+		<div class="cart-buttons">
+	    	<%= link_to "View Cart", cart_path(cart.id+1) ,class: "btn btn-dark-gray" %>
+		</div>
+	<% end %>
+<% end %>
+	
 
 
