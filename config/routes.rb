@@ -16,7 +16,6 @@ Rails.application.routes.draw do
 			post "confirm"
 			get "accept"
 			get "decline"
-			
 			get "detail"
 		end
 	end

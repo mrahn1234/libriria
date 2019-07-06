@@ -1,5 +1,4 @@
 <%= render "banner" %>
-<%= render partial:"shared/notice"%>
 <% if @cart.verify == 3 %>
   <div class="table-users">
     <div class="header">Carts</div>
@@ -18,7 +17,7 @@
       </table>
   </div>
     <div style="float:right; margin-right: 19%">
-      <%= link_to "Borrow", confirm_cart_path(@cart.id), method: :post, id: "borrow"%>
+      <%= link_to "Borrow", confirm_cart_path(@cart.id), id: "borrow"%>
     </div>
 <% else %>
   <h1 style="text-align: center; margin-top: 100px;">
@@ -61,16 +60,21 @@
  // var quantity = Array.from(document.querySelectorAll("#request_quantity_get"));
 
    // console.log(arr2)
-   $('#borrow').click(function(){
+   $('#borrow').click(function(e){
       // console.log(arr2)
+      e.preventDefault();
+       var i = 0;
        $.ajax({
-          type: "POST",
+          method: "POST",
           url: "/carts/"+"<%=@cart.id%>"+"/confirm",
           data: {"dateto": arr1, "number": arr2},
-          dataType: "json",
+          dataType: "script",
           success: function(res)
           {
+            // i = i +1;
+            // window.location.href = "/books"
             console.log(res)
+            // console.log(i.toString())
           },
           error: function(err)
           {

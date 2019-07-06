@@ -1,6 +1,6 @@
 <%= render "banner" %>
       <!-- # 3: carting, 0:pending, 1: accept, 2: decline -->
-<% if user_signed_in? && @carts %>
+<% if user_signed_in? && @carts  && @carts.last && !@carts.last.requests.blank?%>
 	<div class="table-users" style="margin-top: 70px;">
 	   <div class="header">History of Trading</div>
 	   <table cellspacing="0">

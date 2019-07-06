@@ -75,7 +75,6 @@ class BooksController < ApplicationController
 	end
 
 	def sort
-		
 			if params[:books]
 				@books_request = convert params[:books].values
 				respond_to do |format|
@@ -83,7 +82,6 @@ class BooksController < ApplicationController
 					format.js
 				end
 			end
-		
 	end
 
 	def convert arr

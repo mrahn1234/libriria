@@ -1,54 +1,54 @@
 class RequestsController < ApplicationController
 
 	# before_action :find_book, only: [:new, :create]
-	before_action :find_user, only: [:new, :create]
+	before_action :find_user, only: [:new, :create, :destroy]
 	before_action :find_book, only: [:new, :create]
 	before_action :find_request, only: [:destroy]
+	after_action :last_rq, only: [:create]
 	def new
 		@request = Request.new
 	end
 
 	def create
-		# @request= Request.new(request_detail_params)
+		return if @user.nil?
 		@request= Request.new
 
 		if @user.carts.last && @user.carts.last.verify == 3
+			book_ids = book_ids @user.carts.last.requests
+			check = book_ids.include? @book.id
 			@request.cart_id = @user.carts.last.id
+			@request.book_id = @book.id if @book.quantity > 0 && check == false
 		else
 			@request.cart_id = (@user.carts.create).id
-			# respond_to do |format|
-		 #    	format.js{render action: "append"}
-		 #    end
+			@request.book_id = @book.id if @book.quantity > 0
 		end
-
-		@request.book_id = @book.id if @book.quantity > 0
-
 		if @request.save
-			# redirect_to books_url
-			# flash[:success] = "Added to cart"
+			# @last_id = Request.get_last_rq
 			respond_to do |format|
 			    format.html
 		    	format.js
-		    	format.json{render json: @request}
+		    	# format json {render: @request.id}
 		    end
-		    # get_rq_json
 		else
-			# respond_to do |format|
-			#     format.html
-		 #    	format.js
-		 #    end
+			
 		end
-
 	end
 
 	def destroy
 		if @request.destroy
-			redirect_to my_cart_cart_path
+			redirect_to cart_path(@user.carts.last.id)
 		else
-		 	redirect_to my_cart_cart_path
+		 	redirect_to books_url
 		end
 	end
 
+	def book_ids requests
+		arr = []
+		requests.each do |r|
+			arr << r.book_id
+		end
+		return arr
+	end
 	# get object append vao cart
 	def get_rq_json
 		request = Request.last
@@ -72,5 +72,10 @@ class RequestsController < ApplicationController
 
 		def find_request
 			@request = Request.find(params[:id])
+		end
+
+		def last_rq
+			session[:request_id] = @request.id
+			# byebug 
 		end
 end

@@ -5,8 +5,11 @@
         <div class="name">
             <a href="#">The Great Gatsby</a>
         </div>
+        <p><%=  %></p>
         <div class="author"><strong>Author:</strong> F. Scott Fitzgerald</div>
         <div class="price">1 X $10.00</div>
     </div>
-    <a class="remove" href="#"><i class="fa fa-trash-o"></i></a>
+    <%= link_to request_path, class: "remove remove-item", method: :delete, data:{confirm: "You sure?"} do %>
+            <i class="fa fa-trash-o"></i>
+    <% end %>
 </li>

@@ -1,6 +1,7 @@
 <tr>
 	<% book = Book.find(r.book_id) %>
 	<td><%= link_to (image_tag ("books/"+book.book_img_file_name),style:"height: 120px; width: 70px"),book,method: :get%></td>
+	<td><%= book.name %></td>
 	<td><%= r.number %></td>
 	<td><%= r.datefrom%>
 	<td><%= r.dateto%></td>		

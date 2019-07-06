@@ -58,9 +58,9 @@
                                         <li><a href="#">Contact</a></li>
                                         <li class="dropdown">
                                             <% if user_signed_in? %>
-                                                <a data-toggle="dropdown" class="dropdown-toggle disabled" href="#"><%= link_to "Cart", cart_path(@cart) %></a>
+                                                <a data-toggle="dropdown" class="dropdown-toggle disabled" href="#"><%= link_to "Cart", cart_path(cart_id) %></a>
                                                 <ul class="dropdown-menu">
-                                                    <li><%= link_to "Cart", cart_path(@cart) %></li>
+                                                    <li><%= link_to "Cart", cart_path(cart_id) %></li>
                                                     <li> <%= link_to "History of Cart", "/my_cart/"+ current_user.id.to_s, method: :get %></li>
                                                 </ul>
                                             <% else %>

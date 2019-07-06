@@ -2,7 +2,7 @@
 	<% u = User.find(c.user_id) %>
 	<td><%= u.name %></td>
 	<td><%= u.email%></td>
-	<td><%= c.requests[0].datefrom.to_date %></td>
+	<td><%= c.requests[0].datefrom %></td>
 	<% if check_status(c) == "Accept" %>
 		<td style="color: green"><%= check_status(c) %></td>	
 	<% elsif check_status(c) == "Decline" %>
@@ -11,7 +11,12 @@
 		<td style="color: orange;"><%= check_status(c) %></td>
 	<% end %>
 	<td>
-		<%= link_to "", requests_path, method: :delete,class: "fa fa-trash fa-2x",style: "color: #77032F" %> <span class="fa-2x">/</span>
-		<%= link_to "", detail_cart_path(c), class: "fas fa-info fa-2x",style: "color: #035777" %>
+		<% if check_status(c) == "Pending"  %>
+			<%= link_to "", cart_path(c.id), method: :delete,class: "fa fa-trash fa-2x",style: "color: #77032F" %> <span class="fa-2x">/</span>
+			<%= link_to "", detail_cart_path(c), class: "fas fa-info fa-2x",style: "color: #035777" %>
+		<% else %>
+			<%= link_to "", detail_cart_path(c), class: "fas fa-info fa-2x",style: "color: #035777; padding-left: 17px" %>
+		<% end %>
+		
 	</td>	
 </tr>

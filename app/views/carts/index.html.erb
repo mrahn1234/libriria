@@ -1,6 +1,6 @@
 <%= render "banner" %>
       <!-- # 3: carting, 0:pending, 1: accept, 2: decline -->
-<% if @carts %>
+<% if @carts && @carts.last && !@carts.last.requests.blank?%>
 	<div class="table-users" style="margin-top: 70px;">
 	   <div class="header">History of Trading</div>
 	   
@@ -21,7 +21,7 @@
 	</div>
 <% else %>
 	<h1 style="text-align: center; margin-top: 100px;">
-		Your history's cart is emptying <i class="far fa-frown"></i>
+		Users's Cart is emptying <i class="far fa-frown"></i>
 	</h1>
 	<%= link_to books_url  do %>
   		<h3 style="text-align: center; ">

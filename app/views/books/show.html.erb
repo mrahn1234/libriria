@@ -126,7 +126,6 @@
             </div>
         </div>
 </div>
-
 <style type="text/css">
     a.book-author{
        color: #ff7236;     
@@ -138,29 +137,49 @@
 </style>
 <script type="text/javascript">
 $('.add-to-cart').click(function(){
-    var check_quantity ="<%= get_quantity(@book.id) %>"
-    if (check_quantity == "0")
+    var user = "<%= current_user.nil?%>"
+    if (user == "true")
     {
-        alertify
-        .alert("Sold out").setHeader('<em>Thong bao</em>');
+         alertify
+         .alert("Please login!").setHeader('<em>Thong bao</em>');
     }
     else
     {   
-       
-        alertify
-        .alert("Added to cart").setHeader('<em>Thong bao</em>');
-        if($('.carts-append li').text() == "Emptying")
-        {    
-            $('.carts-append').html("<%= j render partial: "requests/item", object: @book, as: :book %>")
-            $('.carts-append').append("<%= j render partial: "layouts/view_cart_btn" %>")
+        var check_quantity ="<%= get_quantity(@book.id) %>"
+        var check_dup_book = "<%= check_item_cart(@book.id) %>"
+        if (check_quantity == "0")
+        {
+            alertify
+            .alert("Out of stock").setHeader('<em>Thong bao</em>');
         }
         else
         {   
-            $('.cart-buttons').remove();
-            $('.carts-append').append("<%= j render partial: "requests/item", object: @book, as: :book %>")
-            $('.carts-append').append("<%= j render partial: "layouts/view_cart_btn" %>")
+            if (check_dup_book == "true")
+            {
+                alertify
+                .alert("Duplicate item in cart!").setHeader('<em>Thong bao</em>');
+            }
+            else
+            {   
+                //ajax {
+                    //type:GET
+                // }
+                alertify
+                .alert("Added to cart").setHeader('<em>Thong bao</em>');
+                if($('.carts-append li').text() == "Emptying")
+                {    
+                    $('.carts-append').html("<%= j render partial: "requests/item", object: @book, as: :book %>")
+                    $('.carts-append').append("<%= j render partial: "layouts/view_cart_btn" %>")
+                }
+                else
+                {   
+                    $('.carts-append').prepend("<%= j render partial: "requests/item", object: @book, as: :book %>")
+                }
+            }
+            
         }
     }
+    
    
   
 })

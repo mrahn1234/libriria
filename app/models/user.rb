@@ -20,7 +20,7 @@ class User < ApplicationRecord
 
 	def create_cart
 		if self.save
-			return self.carts.create
+			return self.carts.create(verify: 3)
 		end
 	end
 

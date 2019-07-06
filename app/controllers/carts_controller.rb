@@ -2,24 +2,23 @@ class CartsController < ApplicationController
 	# before_action :set_user
 	before_action :find_user
 	# before_action :find_book, only: [:new, :create, :show]
-	# before_action :find_cart, only: [:destroy]
+	before_action :find_cart, only: [:decline,:undo_quantity,:destroy,:accept]
 	# before_action :find_request, only: [:destroy]
 	# before_action :find_user_cart, only: [:update_request_params,:accept,:decline,:confirm, :update_quantity,:show]
 	before_action :find_detail_cart, only: [:detail]
 	before_action :cart_and_request, only:[:show,:confirm,:update_request_params]
-
 
 	def index
 		@carts = Cart.carts_admin.order("created_at DESC")
 	end
 
 	def show
-		@requests = @list_requests 	
-		respond_to do |format|
-			    format.html
-		    	format.js
-		    	format.json{render json: @requests}
-		end
+		@requests = @list_requests.order("created_at DESC")
+		# respond_to do |format|
+		# 	    format.html
+		#     	format.js
+		#     	format.json{render json: @requests}
+		# end
 	end
 
 	def detail
@@ -40,32 +39,40 @@ class CartsController < ApplicationController
 	def update_request_params dateto,number
 		session[:dateto] = dateto
 		session[:number] = number
+		book_arr = []
+		check = 0
 		@list_requests.each_with_index do |r,dem|
-			if dateto && number
-				r.update_attributes(number: session[:number][dem].to_i,datefrom: Time.zone.now.to_date, dateto: session[:dateto][dem].to_date)
-				book = Book.find(r.book_id)
-				if book.quantity >= r.number
-					book.update_attributes(quantity: book.quantity - r.number)
+			if dateto  && number
+				book_arr[dem] = Book.find(r.book_id)
+				if book_arr[dem].quantity >= session[:number][dem].to_i && session[:dateto][dem].to_date > Time.zone.now.to_date
+					r.update_attributes(number: session[:number][dem].to_i,datefrom: Time.zone.now.to_date, dateto: session[:dateto][dem].to_date)
+					book_arr[dem].quantity = book_arr[dem].quantity - r.number
 				else
-					render action: "show"
+					check = 3
+					break
 				end
-			end	
+			end
 		end
-
+		# if verify == 3 return = 0 update quantity
+		if check == 0
+			book_arr.each_with_index do |b,index|
+				book = Book.find_by(id:b.id)
+				book.update_attributes(quantity: b.quantity)
+			end
+			@cart.update_attributes(verify: 0)
+		else
+			return nil
+		end
 	end
 
 	def confirm
 		dateto = params["dateto"] # get dateto tu tren view ve 
 		number = params["number"] # get number tu tren view ve
 		update_request_params dateto, number
-		@cart.update_attributes(verify: 0)
-		if @cart.save
-			redirect_to "/my_cart/" + current_user.id.to_s
-		else
-			render action: "show"
+		@user.carts.create if @cart.verify != 0 
+		respond_to do |f|
+			f.js 
 		end
-			# RequestMailer.borrow_email(current_user,@request).deliver
-			# flash[:success] = "Your request have been send to admin, please wait progess"
 	end
 
 	def accept 
@@ -83,6 +90,7 @@ class CartsController < ApplicationController
 
   	def decline
 	    	undo_quantity
+	    	redirect_to carts_url if @cart.save
 	    	# RequestMailer.reply_email(@request).deliver
 	    	# flash[:danger] = "Decline request"
   	end	
@@ -92,22 +100,8 @@ class CartsController < ApplicationController
   	end
 
   	def destroy
-  		# if @user.role == 1
-  		# 	if @cart.verify == 3
-  		# 		undo_quantity
-  		# 		if @cart.destroy
-  		# 			redirect_to carts_url
-  		# 		else
-	   #  			redirect_to carts_url
-  		# 		end
-  		# 	end
-  		# else
-  		# 	if @cart.verify == 3
-  		# 		undo_quantity
-  		# 	end
-	   #  		redirect_to carts_url
-  		# 	else
-  		# end
+  		undo_quantity 
+  		redirect_to "/my_cart/:id(.:format)" if @cart.destroy
   	end
 	
 	private
@@ -120,9 +114,10 @@ class CartsController < ApplicationController
 			@user = current_user
 		end
 
-		# def find_cart
-		# 	@cart = Cart.where(user_id: @user.id).last
-		# end
+		def find_cart
+
+			@cart = Cart.find(params[:id])
+		end
 
 		def find_user_cart
 			@cart = Cart.find(params[:id])
@@ -145,36 +140,12 @@ class CartsController < ApplicationController
 			params.require(:request).permit(:number,:dateto)
 		end
 
-		# def update_quantity list_requests
-		# 	list_requests.each do |r|
-		# 		@b = Book.find_by(id: r.book_id)
-		# 		if r && r.number <= @b.quantity
-		# 			@b.update_attributes(quantity: @b.quantity  - r.number)					
-		# 			r = nil
-		# 		else
-		# 			flash[:danger] = "Khong du so luong"
-		# 			render action: "show"
-		# 		end
-		# 	end
-		# 	# if @cart.save
-		# 		redirect_to root_url
-		# 	# else
-		# 		# render action: "show"
-		# 	# end		s
-		# end
-
 		def undo_quantity
 		 	@requests = Request.where("cart_id = "+ @cart.id.to_s)
 			@requests.each do |r|
-				@cart.verify = 2
 				@book = Book.find(r.book_id)
-				@book.quantity += r.number
-				@book.save
-	    		if @cart.save
-  					redirect_to carts_url
-	    		else
-	    			redirect_to carts_url	
-	    		end
+				@book.update_attributes(quantity: @book.quantity + r.number)
 			end
+			@cart.verify = 2
 		end 
 end
